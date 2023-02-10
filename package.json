@@ -9,8 +9,9 @@
   "devDependencies": {
     "@heroicons/vue": "^2.0.12",
     "@nuxt/content": "^2.2.1",
-    "@nuxtjs/tailwindcss": "^6.1.2",
+    "@nuxtjs/google-fonts": "^3.0.0-1",
+    "@nuxtjs/tailwindcss": "^6.3.1",
     "@tailwindcss/typography": "^0.5.7",
-    "nuxt": "^3.0.0-rc.12"
+    "nuxt": "^3.2.0"
   }
 }
