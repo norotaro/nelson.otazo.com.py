@@ -51,7 +51,8 @@
                             Phone:
                         </p>
                         <a href="tel:&#43;&#53;&#57;&#53;&#57;&#56;&#57;&#57;&#54;&#57;&#52;&#51;&#57;"
-                            aria-label="My phone number" title="My phone number" class="transition-colors duration-300 text-cyan-accent-400 hover:text-cyan-800">
+                            aria-label="My phone number" title="My phone number"
+                            class="transition-colors duration-300 text-cyan-accent-400 hover:text-cyan-800">
                             &#43;&#53;&#57;&#53; &#57;&#56;&#50; &#57;&#54;&#57;&#52;&#51;&#57;
                         </a>
                     </div>
@@ -60,7 +61,8 @@
                             Email:
                         </p>
                         <a href="mailto:&#110;&#101;&#108;&#115;&#111;&#110;&#111;&#116;&#97;&#122;&#111;&#43;&#100;&#101;&#118;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;?subject=Hello%20Nelson!&body=I%20contact%20you%20from%20your%20website..."
-                            title="Write me a email" aria-label="Write me a email" class="transition-colors duration-300 text-cyan-accent-400 hover:text-cyan-800">
+                            title="Write me a email" aria-label="Write me a email"
+                            class="transition-colors duration-300 text-cyan-accent-400 hover:text-cyan-800">
                             &#110;&#101;&#108;&#115;&#111;&#110;&#111;&#116;&#97;&#122;&#111;&#43;&#100;&#101;&#118;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;
                         </a>
                     </div>
@@ -138,7 +140,7 @@
           lg:flex-row
         ">
                 <p class="text-sm text-gray-500">
-                    © Copyright 2023 Nelson Otazo.
+                    © Copyright {{ new Date().getFullYear() }} Nelson Otazo.
                 </p>
                 <ul class="
             flex flex-col

@@ -1,6 +1,5 @@
 <!-- ./pages/blog/index.vue -->
-
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   key: (route) => route.fullPath,
 });
@@ -10,66 +9,76 @@ const {
   query: { tags },
 } = useRoute();
 
-const filter = ref(tags?.split(","));
+const filter = ref(tags?.toString().split(","));
 
 // set meta for page
 useHead({
   title: "All articles",
-  meta: [{ name: "description", content: "Here's a list of all my great articles" }],
+  meta: [{ name: "description", content: "Aquí encontrarás artículos y tutoriales completamente en español sobre programación, desarrollo web y herramientas relacionadas." }],
 });
+
+const formatDate = function (date: string): string {
+  const options: Object = { year: 'numeric', month: 'long', day: 'numeric' }
+  return new Date(date).toLocaleDateString('es-PY', options)
+}
 </script>
+
 <template>
-  <main>
-    <header class="page-heading">
-      <div class="wrapper">
-        <h1 class="text-5xl font-extrabold">All articles</h1>
-        <p class="font-medium text-lg">Here's a list of all my great articles</p>
-      </div>
-    </header>
-    <section class="page-section">
-      <Tags />
+  <BlogHeader></BlogHeader>
+  <section class="page-section">
+    <Tags />
 
-      <!-- Render list of all articles in ./content/blog using `path` -->
-      <!-- Provide only defined fieldsin the `:query` prop -->
-      <ContentList
-        path="/blog"
-        :query="{
-          only: ['title', 'description', 'tags', '_path', 'img'],
-          where: {
-            tags: {
-              $contains: filter,
-            },
-          },
-          $sensitivity: 'base',
-        }"
-      >
-        <!-- Default list slot -->
-        <template v-slot="{ list }">
-          <ul class="article-list">
-            <li v-for="article in list" :key="article._path" class="article-item">
-              <NuxtLink :to="article._path">
-                <div class="wrapper">
-                  <div class="img-cont w-32 shrink-0">
-                    <img :src="`/img/blog/${article.img}`" :alt="article.title" class="rounded-lg max-h-[8rem]" />
-                  </div>
-                  <header>
-                    <h1 class="text-2xl font-semibold">{{ article.title }}</h1>
-                    <p>{{ article.description }}</p>
-                    <ul class="article-tags">
-                      <li class="tag !py-0.5" v-for="(tag, n) in article.tags" :key="n">{{ tag }}</li>
-                    </ul>
-                  </header>
+    <!-- Render list of all articles in ./content/blog using `path` -->
+    <!-- Provide only defined fieldsin the `:query` prop -->
+    <ContentList path="/blog" :query="{
+      only: ['title', 'description', 'category', 'date', 'tags', '_path', 'img'],
+      // where: {
+      //   tags: {
+      //     $contains: filter,
+      //   },
+      // },
+      $sensitivity: 'base',
+    }">
+      <!-- Default list slot -->
+      <template v-slot="{ list }">
+        <div class="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-wscreen-xl md:px-24 lg:px-8 lg:py-20">
+          <div v-for="article in list" :key="article._path"
+            class="border-t border-b py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl lg:py-10">
+            <div class="grid gap-10 lg:grid-cols-2">
+              <div class="lg:pr-10">
+                <a href="/"
+                  class="font-bold transition-colors duration-200 text-yellow-accent-700 hover:text-yellow-800"
+                  aria-label="Category">
+                  {{ article.category }}
+                </a>
+                <p class=" mb-2 mt-5 text-xs font-semibold tracking-wide text-gray-600 uppercase">
+                  {{ formatDate(article.date) }}
+                </p>
+                <div class="mb-4">
+                  <NuxtLink :to="article._path" aria-label="Article"
+                    class="inline-block max-w-lg font-sans text-3xl font-extrabold leading-none tracking-tight text-black transition-colors duration-200 hover:text-cyan-accent-700 sm:text-4xl">
+                    {{ article.title }}
+                  </NuxtLink>
                 </div>
-              </NuxtLink>
-            </li>
-          </ul>
-        </template>
+                <p class="mb-6 text-gray-900">
+                  {{ article.description }}
+                </p>
+              </div>
+              <div>
+                <NuxtLink :to="article._path" aria-label="Article"
+                  class="inline-block max-w-lg font-sans text-3xl font-extrabold leading-none tracking-tight text-black transition-colors duration-200 hover:text-cyan-accent-700 sm:text-4xl">
+                  <img class="object-cover w-full h-56 rounded shadow-lg sm:h-80" :src="`/img/blog/${article.img}`" :alt="article.title">
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
 
-        <!-- Not found slot to display message when no content us is found -->
-        <template #not-found>
-          <p>No articles found.</p>
-        </template>
-      </ContentList>
-    </section>
-  </main>
+      <!-- Not found slot to display message when no content us is found -->
+      <template #not-found>
+        <p>No articles found.</p>
+      </template>
+    </ContentList>
+  </section>
 </template>
