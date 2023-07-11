@@ -140,7 +140,7 @@
           lg:flex-row
         ">
                 <p class="text-sm text-gray-500">
-                    © Copyright {{ new Date().getFullYear() }} Nelson Otazo.
+                    © Copyright {{ new Date().getFullYear() }} Nelson Otazo
                 </p>
                 <ul class="
             flex flex-col
