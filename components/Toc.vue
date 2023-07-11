@@ -1,11 +1,11 @@
 <!-- ./components/Toc.vue -->
 
-<script setup>
+<script setup lang="ts">
 // define links prop
-defineProps(["links"]);
+const props = defineProps(["links"]);
 
 // flatten TOC links nested arrays to one array
-const flattenLinks = (links) => {
+const flattenLinks = (links: Array<any>) => {
   let _links = links
     .map((link) => {
       let _link = [link];
@@ -17,20 +17,20 @@ const flattenLinks = (links) => {
     })
     .flat(1);
 
-  console.log({ _links });
-
   return _links;
 };
+
+const links: Array<string> = flattenLinks(props.links)
 </script>
 
 <template>
-  <nav class="toc">
+  <nav v-if="links.length > 0" class="toc">
     <header class="toc-header">
       <h3 class="text-xl font-bold">Contenido</h3>
     </header>
     <ul class="toc-links">
       <!-- render each link with depth class -->
-      <li v-for="link of flattenLinks(links)" :key="link.id" :class="`toc-link _${link.depth}`">
+      <li v-for="link of links" :key="link.id" :class="`toc-link _${link.depth}`">
         <a :href="`#${link.id}`">
           {{ link.text }}
         </a>

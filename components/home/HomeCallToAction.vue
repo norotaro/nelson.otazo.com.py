@@ -30,7 +30,7 @@
             </p>
             <hr class="my-8 border-gray-300">
             <div class="text-center">
-                <NuxtLink to="/blog"
+                <NuxtLink to="/blog/page/1"
                     class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-cyan-400 hover:bg-cyan-accent-700 focus:shadow-outline focus:outline-none">
                     Visit Blog
                 </NuxtLink>

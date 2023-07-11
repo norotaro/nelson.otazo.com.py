@@ -20,9 +20,10 @@ Instala el primer resultado llamado "ESLint". (Es [este](https://marketplace.vis
 
 Abre la configuración de VSCode. En Mac puedes hacerlo con el atajo `Cmd+,` o por el menú: Code > Preferencias > Configuración. Se abrirá el editor de configuración amigable pero necesitamos poder editar la configuración directamente como JSON.
 
-Haz click en el pequeño ícono de arriba a la derecha que parece un papel con una pequeña flecha. ![VSCode settings image](/blog/img/como-dar-formato-a-tu-codigo-usando-eslint-en-vscode/vscode-settings.jpg) Agrega estas 4 líneas en el primer nivel de la configuración.
+Haz click en el pequeño ícono de arriba a la derecha que parece un papel con una pequeña flecha. ![VSCode settings image](/img/blog/como-dar-formato-a-tu-codigo-usando-eslint-en-vscode/vscode-settings.jpg) Agrega estas 4 líneas en el primer nivel de la configuración.
 
-```json
+```json{3-6}[settings.json]
+// settings.json
 {
     // ...
     "eslint.format.enable": true,
@@ -33,7 +34,7 @@ Haz click en el pequeño ícono de arriba a la derecha que parece un papel con u
 ```
 
 ```javascript
-// ./nuxt.config.ts
+// nuxt.config.ts
 
 import { defineNuxtConfig } from 'nuxt'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config

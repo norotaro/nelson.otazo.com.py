@@ -12,7 +12,7 @@
         <nav class="site-nav">
           <ul class="links">
             <li class="link">
-              <NuxtLink to="/blog">Blog</NuxtLink>
+              <NuxtLink to="/blog/page/1">Blog</NuxtLink>
             </li>
           </ul>
         </nav>

@@ -9,12 +9,10 @@ export default defineNuxtConfig({
   content: {
     // https://content.nuxtjs.org/api/configuration
     highlight: {
-      theme: {
-        // Default theme (same as single string)
-        default: "nord",
-        // Theme used if `html.dark`
-        dark: "github-dark",
-      },
+      theme: "github-dark",
+      preload: [
+        'php',
+      ]
     },
   },
   tailwindcss: {

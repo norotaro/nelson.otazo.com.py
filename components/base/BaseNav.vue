@@ -9,7 +9,7 @@ const menu = {
         },
         {
             title: 'Blog',
-            href: '/blog'
+            href: '/blog/page/1'
         }
     ]
 };
