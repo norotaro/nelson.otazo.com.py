@@ -54,7 +54,7 @@
                         <div class="bg-white rounded shadow-2xl p-7 sm:p-10">
                             <div class="flex flex-col items-center">
                                 <img class="object-cover w-24 h-24 rounded-full shadow"
-                                    src="~/assets/img/home/avatar.jpg" alt="Person">
+                                    src="~/assets/img/home/avatar.png" alt="Person">
                                 <div class="flex flex-col text-center mt-2">
                                     <p class="text-lg font-bold">
                                         Nelson Otazo

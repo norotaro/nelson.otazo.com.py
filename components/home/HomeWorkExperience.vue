@@ -33,8 +33,57 @@
         </div>
 
         <div class="relative container mx-auto px-6 flex flex-col space-y-8">
-            <div
-                class="absolute z-0 border w-0 h-full bg-white shadow-md inset-0 left-17 md:mx-auto md:right-0 md:left-0" />
+            <div class="absolute z-0 border w-0 h-full bg-white shadow-md inset-0 left-17 md:mx-auto md:right-0 md:left-0"></div>
+
+            <!-- DecisionLink -->
+            <div class="relative z-10">
+                <img src="~/assets/img/decisionlink.png" alt="" class="timeline-img">
+                <div class="timeline-container timeline-container-left">
+                    <div class="timeline-pointer timeline-pointer-left" aria-hidden="true" />
+                    <div class="bg-gray-50 p-6 rounded-md shadow-md">
+                        <span class="font-bold text-cyan-600 text-sm tracking-wide">
+                            Sep 2021 - May 2023
+                            <span class="font-normal">
+                                (1 year, 9 months)
+                            </span>
+                        </span>
+                        <h3 class="text-lg font-bold pt-1">
+                            PHP/Laravel Developer
+                            <span class="font-normal">
+                                at
+                                <a href="https://opentech.com.py" target="_blank" class="text-cyan-400 underline">
+                                    DecisionLink
+                                </a>
+                            </span>
+                        </h3>
+                        <p class="pt-1">
+                            I worked remotely maintaining and developing the Asset report generator and designing a new architecture to refactor the report generator.
+                        </p>
+                        <p class="flex flex-row flex-wrap gap-2.5 pt-4">
+                            <img align="left" alt="PHP" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/php-alt.svg">
+                            <img align="left" alt="Laravel" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/laravel.svg">
+                            <img align="left" alt="Git" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/git-icon.svg">
+                            <img align="left" alt="Terminal" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/terminal.svg">
+                            <img align="left" alt="JavaScript" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/javascript.svg">
+                            <img align="left" alt="VueJS" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/vue.svg">
+                            <img align="left" alt="NuxtJS" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/nuxt-icon.svg">
+                            <img align="left" alt="HTML5" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/html-5.svg">
+                            <img align="left" alt="CSS3" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/css-3.svg">
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applaudo -->
             <div class="relative z-10">
                 <img src="https://cdn01.applaudostudios.com/wp-content/uploads/2020/10/05161914/Profile_Applaudo.png"
                     alt="" class="timeline-img">
@@ -42,20 +91,22 @@
                     <div class="timeline-pointer" aria-hidden="true" />
                     <div class="bg-gray-50 p-6 rounded-md shadow-md">
                         <span class="font-bold text-cyan-600 text-sm tracking-wide">
-                            Jul 2021 - current
+                            Jun 2021 - Jun 2023
+                            <span class="font-normal">
+                                (2 years)
+                            </span>
                         </span>
                         <h3 class="text-lg font-bold pt-1">
-                            PHP Developer
+                            PHP/Laravel Developer
                             <span class="font-normal">
                                 at
-                                <a href="https://applaudostudios.com" target="_blank" class="text-cyan-400 underline">
-                                    Applaudo Studios
+                                <a href="https://applaudo.com" target="_blank" class="text-cyan-400 underline">
+                                    Applaudo
                                 </a>
                             </span>
                         </h3>
                         <p class="pt-1">
-                            I'm working at Applaudo Studios as PHP Developer. I joined as full-time employee in June
-                            2021. I work remotely from Asunción, Paraguay.
+                            I worked remotely as PHP/Laravel Backend Developer. Also was a Trainer in the Laravel Trainee Program of the company.
                         </p>
                         <p class="flex flex-row flex-wrap gap-2.5 pt-4">
                             <img align="left" alt="PHP" width="23px" height="23px"
@@ -70,6 +121,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Opentech -->
             <div class="relative z-10">
                 <img src="~/assets/img/opentech.jpg" alt="" class="timeline-img">
                 <div class="timeline-container timeline-container-left">
@@ -121,6 +174,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- UNDP -->
             <div class="relative z-10">
                 <img src="~/assets/img/pnud.jpg" alt="" class="timeline-img">
                 <div class="timeline-container">
@@ -160,6 +215,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Sinergis -->
             <div class="relative z-10">
                 <img src="~/assets/img/sinergis.jpg" alt="" class="timeline-img">
                 <div class="timeline-container timeline-container-left">
