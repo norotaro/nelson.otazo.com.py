@@ -1,5 +1,7 @@
 # nelson.otazo.com.py
 
+This is a Nuxt site
+
 ## Setup
 
 Make sure to install the dependencies:
