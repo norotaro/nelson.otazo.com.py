@@ -1,12 +1,12 @@
 <script setup>
-// import getSiteMeta, { title } from './utils/getSiteMeta';
+import getSiteMeta, { title } from './utils/getSiteMeta';
 
-// const meta = getSiteMeta();
+const meta = getSiteMeta();
 
 useHead({
   title,
   meta: [
-    // ...meta,
+    ...meta,
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { property: 'og:site_name', content: title },
