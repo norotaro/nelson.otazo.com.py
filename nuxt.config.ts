@@ -26,4 +26,9 @@ export default defineNuxtConfig({
     },
     display: 'swap'
   },
+  runtimeConfig: {
+    public: {
+      gtagId: ''
+    }
+  }
 });
