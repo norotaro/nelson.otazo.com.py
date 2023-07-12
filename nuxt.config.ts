@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     "@nuxtjs/tailwindcss",
-    "@nuxtjs/google-fonts"
+    "@nuxtjs/google-fonts",
+    'nuxt-gtag'
   ],
   devServerHandlers: [],
   content: {
@@ -25,5 +26,5 @@ export default defineNuxtConfig({
       Montserrat: [100, 200, 300, 400, 500, 600, 700, 800, 900]
     },
     display: 'swap'
-  },
+  }
 });
