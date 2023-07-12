@@ -946,7 +946,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/kit@npm:3.6.2, @nuxt/kit@npm:^3.4.2, @nuxt/kit@npm:^3.5.0, @nuxt/kit@npm:^3.5.3, @nuxt/kit@npm:^3.6.1":
+"@nuxt/kit@npm:3.6.2, @nuxt/kit@npm:^3.5.0, @nuxt/kit@npm:^3.5.3, @nuxt/kit@npm:^3.6.1":
   version: 3.6.2
   resolution: "@nuxt/kit@npm:3.6.2"
   dependencies:
@@ -6120,17 +6120,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-gtag@npm:^0.5.7":
-  version: 0.5.7
-  resolution: "nuxt-gtag@npm:0.5.7"
-  dependencies:
-    "@nuxt/kit": ^3.4.2
-    defu: ^6.1.2
-    pathe: ^1.1.0
-  checksum: 68a9b332cdbc51d524a774116d1bc3049f0b5861c07d63ac3e405841f59b42386de2072089a6e13d94e3763ac4421f574f663e6b83bd5208da55c6fe5e7f3ca3
-  languageName: node
-  linkType: hard
-
 "nuxt@npm:^3.2.0":
   version: 3.6.2
   resolution: "nuxt@npm:3.6.2"
@@ -7511,7 +7500,6 @@ __metadata:
     "@nuxtjs/tailwindcss": ^6.3.1
     "@tailwindcss/typography": ^0.5.7
     nuxt: ^3.2.0
-    nuxt-gtag: ^0.5.7
   languageName: unknown
   linkType: soft
 

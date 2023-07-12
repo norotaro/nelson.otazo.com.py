@@ -3,8 +3,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     "@nuxtjs/tailwindcss",
-    "@nuxtjs/google-fonts",
-    'nuxt-gtag'
+    "@nuxtjs/google-fonts"
   ],
   devServerHandlers: [],
   content: {
