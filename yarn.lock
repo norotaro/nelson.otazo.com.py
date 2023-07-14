@@ -935,20 +935,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/devtools-kit@npm:^0.6.7":
-  version: 0.6.7
-  resolution: "@nuxt/devtools-kit@npm:0.6.7"
-  dependencies:
-    "@nuxt/kit": ^3.6.1
-    "@nuxt/schema": ^3.6.1
-    execa: ^7.1.1
-  peerDependencies:
-    nuxt: ^3.6.1
-    vite: "*"
-  checksum: a10b85d71f353ee93f3e62bebc201042135d25e462b4da0b180fb448530a9de67c1784f102b5d5104fbfec8085e03a665f7ee93215fa8805943a4b64a2a7cde2
-  languageName: node
-  linkType: hard
-
 "@nuxt/kit@npm:3.6.2, @nuxt/kit@npm:^3.5.0, @nuxt/kit@npm:^3.5.3, @nuxt/kit@npm:^3.6.1, @nuxt/kit@npm:^3.6.2":
   version: 3.6.2
   resolution: "@nuxt/kit@npm:3.6.2"
@@ -990,7 +976,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/schema@npm:3.6.2, @nuxt/schema@npm:^3.6.1, @nuxt/schema@npm:^3.6.2":
+"@nuxt/schema@npm:3.6.2, @nuxt/schema@npm:^3.6.2":
   version: 3.6.2
   resolution: "@nuxt/schema@npm:3.6.2"
   dependencies:
@@ -6137,27 +6123,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-simple-sitemap@npm:^3.0.9":
-  version: 3.0.9
-  resolution: "nuxt-simple-sitemap@npm:3.0.9"
-  dependencies:
-    "@nuxt/devtools-kit": ^0.6.7
-    "@nuxt/kit": ^3.6.2
-    chalk: ^5.3.0
-    defu: ^6.1.2
-    escape-string-regexp: ^5.0.0
-    fast-glob: ^3.3.0
-    knitwork: ^1.0.0
-    nuxt-site-config: ^1.0.5
-    nuxt-site-config-kit: ^1.0.5
-    pathe: ^1.1.1
-    radix3: ^1.0.1
-    semver: ^7.5.4
-    ufo: ^1.1.2
-  checksum: 0db0415861cf4d535cb1197848bed6a7929103a70af947f84da5023a1145cae995b4ae80279d21023753aa095688933d992ca3f9dce8ee9962c2c0973649b269
-  languageName: node
-  linkType: hard
-
 "nuxt-site-config-kit@npm:1.0.5, nuxt-site-config-kit@npm:^1.0.5":
   version: 1.0.5
   resolution: "nuxt-site-config-kit@npm:1.0.5"
@@ -7567,7 +7532,6 @@ __metadata:
     "@tailwindcss/typography": ^0.5.7
     nuxt: ^3.6.1
     nuxt-simple-robots: ^3.0.2
-    nuxt-simple-sitemap: ^3.0.9
     vue-gtag-next: ^1.14.0
   languageName: unknown
   linkType: soft
@@ -7638,7 +7602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.5.0, semver@npm:^7.5.3, semver@npm:^7.5.4":
+"semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.5.0, semver@npm:^7.5.3":
   version: 7.5.4
   resolution: "semver@npm:7.5.4"
   dependencies:
