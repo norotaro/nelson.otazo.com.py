@@ -1,20 +1,11 @@
 <script setup lang="ts">
 import type { QueryBuilderParams } from '@nuxt/content/dist/runtime/types'
 
-const { params } = useRoute();
-
-onMounted(() => {
-    console.log(params);
-})
+const { params, query: { tags } } = useRoute();
 
 definePageMeta({
     key: (route) => route.fullPath,
 });
-
-// get tag query
-const {
-    query: { tags },
-} = useRoute();
 
 const filter = ref(tags?.toString().split(","));
 
@@ -36,7 +27,8 @@ const total: number = (await queryContent('/blog/post').find()).length
 
 // set meta for page
 useHead({
-    title: "All articles",
+    title: "Mi blog en español",
+    htmlAttrs: {lang: 'es'},
     meta: [{ name: "description", content: "Aquí encontrarás artículos y tutoriales completamente en español sobre programación, desarrollo web y herramientas relacionadas." }],
 });
 

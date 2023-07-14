@@ -3,7 +3,9 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     "@nuxtjs/tailwindcss",
-    "@nuxtjs/google-fonts"
+    "@nuxtjs/google-fonts",
+    "nuxt-simple-robots",
+    'nuxt-simple-sitemap',
   ],
   devServerHandlers: [],
   content: {
@@ -28,7 +30,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      gtagId: ''
+      gtagId: '',
     }
-  }
+  },
+  site: {
+    url: 'https://nelson.otazo.com.py',
+  },
 });

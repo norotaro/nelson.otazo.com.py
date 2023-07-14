@@ -56,9 +56,9 @@
                                 <img class="object-cover w-24 h-24 rounded-full shadow"
                                     src="~/assets/img/home/avatar.png" alt="Person">
                                 <div class="flex flex-col text-center mt-2">
-                                    <p class="text-lg font-bold">
+                                    <h1 class="text-lg font-bold">
                                         Nelson Otazo
-                                    </p>
+                                    </h1>
                                     <p class="mb-4 text-xs text-gray-800">
                                         aka Norotaro
                                     </p>

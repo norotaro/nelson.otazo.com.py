@@ -5,6 +5,7 @@ const meta = getSiteMeta();
 
 useHead({
   title,
+  htmlAttrs: {lang: 'en'},
   meta: [
     ...meta,
     { charset: 'utf-8' },
