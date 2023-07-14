@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
     "nuxt-simple-robots",
-    'nuxt-simple-sitemap',
+    // 'nuxt-simple-sitemap',
   ],
   devServerHandlers: [],
   content: {
