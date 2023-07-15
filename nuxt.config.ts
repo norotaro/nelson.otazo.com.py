@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
-    "nuxt-simple-robots",
+    // "nuxt-simple-robots",
     // 'nuxt-simple-sitemap',
   ],
   devServerHandlers: [],
