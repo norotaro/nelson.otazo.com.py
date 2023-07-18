@@ -2,9 +2,9 @@
 export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
-    "@nuxtjs/tailwindcss",
-    "@nuxtjs/google-fonts"
+    "@nuxtjs/tailwindcss"
   ],
+  sourcemap: false,
   devServerHandlers: [],
   content: {
     // https://content.nuxtjs.org/api/configuration
@@ -18,17 +18,12 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: "~/assets/css/main.css",
   },
-
-  // Google Fonts module configuration: https://google-fonts.nuxtjs.org
-  googleFonts: {
-    families: {
-      Montserrat: [100, 200, 300, 400, 500, 600, 700, 800, 900]
-    },
-    display: 'swap'
-  },
   runtimeConfig: {
     public: {
       gtagId: ''
     }
-  }
+  },
+  site: {
+    url: 'https://nelson.otazo.com.py',
+  },
 });
