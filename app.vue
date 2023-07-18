@@ -26,7 +26,7 @@ useHead({
       {
         rel: 'preconnect',
         href: 'https://fonts.gstatic.com',
-        crossorigin
+        crossorigin: true
       },
       {
         rel: 'stylesheet',
