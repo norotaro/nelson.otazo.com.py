@@ -2,7 +2,9 @@
 export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
-    "@nuxtjs/tailwindcss"
+    "@nuxtjs/tailwindcss",
+    "nuxt-simple-sitemap",
+    "nuxt-simple-robots",
   ],
   sourcemap: false,
   devServerHandlers: [],
