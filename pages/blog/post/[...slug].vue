@@ -26,7 +26,6 @@ const [prev, next] = data.value.surround;
 // set the meta
 useHead({
   title: data.value.article.title,
-  htmlAttrs: {lang: 'es'},
   meta: [
     ...getMeta(),
     {
