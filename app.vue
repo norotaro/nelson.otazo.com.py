@@ -15,7 +15,8 @@ useHead({
     { property: 'og:image:height', content: '300' },
     { name: 'twitter:site', content: '@norotaro_dev' },
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'format-detection', content: 'telephone=no' }
+    { name: 'format-detection', content: 'telephone=no' },
+    { name: 'google-site-verification', content: 'ELfyPA2bVB6il83xoP8GzAaNZOodIiUnP0AfcsXVZaQ'},
   ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
