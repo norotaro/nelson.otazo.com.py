@@ -35,6 +35,53 @@
         <div class="relative container mx-auto px-6 flex flex-col space-y-8">
             <div class="absolute z-0 border w-0 h-full bg-white shadow-md inset-0 left-17 md:mx-auto md:right-0 md:left-0"></div>
 
+        <!-- Curotec -->
+        <div class="relative z-10">
+            <img src="~/assets/img/curotec.jpeg"
+                alt="" class="timeline-img">
+            <div class="timeline-container">
+                <div class="timeline-pointer" aria-hidden="true" />
+                <div class="bg-gray-50 p-6 rounded-md shadow-md">
+                    <span class="font-bold text-cyan-600 text-sm tracking-wide">
+                        Aug 2023 - Present
+                        <span class="font-normal">
+                            (current)
+                        </span>
+                    </span>
+                    <h3 class="text-lg font-bold pt-1">
+                        Full-Stack Developer
+                        <span class="font-normal">
+                            at
+                            <a href="https://curotec.com" target="_blank" class="text-cyan-400 underline">
+                                Curotec
+                            </a>
+                        </span>
+                    </h3>
+                    <p class="pt-1">
+                        I'm working remotely as Full-Stack Developer.
+                    </p>
+                    <p class="flex flex-row flex-wrap gap-2.5 pt-4">
+                        <img align="left" alt="PHP" width="23px" height="23px"
+                            src="https://github.com/get-icon/geticon/raw/master/icons/php-alt.svg">
+                        <img align="left" alt="Laravel" width="23px" height="23px"
+                            src="https://github.com/get-icon/geticon/raw/master/icons/laravel.svg">
+                            <img align="left" alt="JavaScript" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/javascript.svg">
+                            <img align="left" alt="VueJS" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/vue.svg">
+                            <img align="left" alt="HTML5" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/html-5.svg">
+                            <img align="left" alt="CSS3" width="23px" height="23px"
+                                src="https://github.com/get-icon/geticon/raw/master/icons/css-3.svg">
+                        <img align="left" alt="Git" width="23px" height="23px"
+                            src="https://github.com/get-icon/geticon/raw/master/icons/git-icon.svg">
+                        <img align="left" alt="Terminal" width="23px" height="23px"
+                            src="https://github.com/get-icon/geticon/raw/master/icons/terminal.svg">
+                    </p>
+                </div>
+            </div>
+        </div>
+
             <!-- DecisionLink -->
             <div class="relative z-10">
                 <img src="~/assets/img/decisionlink.png" alt="" class="timeline-img">
