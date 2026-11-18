@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Nelson Otazo · Ingeniero de software"
+  description="Desarrollo software desde 2009. Hoy construyo y mantengo Teuka junto a Derlis Gómez."
+  lang="es"
+>
+  <section class="es-home">
+    <h1>Nelson Otazo</h1>
+    <p>Desarrollo software desde 2009. Hoy construyo y mantengo Teuka junto a Derlis Gómez.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .es-home {
+    padding-block: var(--space-8) var(--space-7);
+    display: grid;
+    gap: var(--space-4);
+    max-width: 45rem;
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+  }
+  p {
+    font-size: 1.125rem;
+    color: var(--color-ink-body);
+  }
+</style>

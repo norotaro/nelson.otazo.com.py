@@ -1,0 +1,69 @@
+---
+import { NAV, t, type Locale } from '../i18n/ui';
+import { pagePath } from '../lib/page-path';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const home = lang === 'es' ? '/es' : '/';
+const current = pagePath(Astro.url);
+---
+
+<nav class="nav card" aria-label={t(lang, 'nav.label')}>
+  <a class="nav__home link-plain" href={home}>~/norotaro</a>
+  <ul class="nav__links" role="list">
+    {
+      NAV[lang].map((item) => (
+        <li>
+          <a
+            class="link-plain"
+            href={item.href}
+            aria-current={current === item.href ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
+
+  .nav__home {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+
+  .nav__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav__links a {
+    color: var(--color-ink-muted);
+  }
+
+  .nav__links a:hover,
+  .nav__links a[aria-current='page'] {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>

@@ -1,0 +1,4 @@
+# The old Nuxt site published /sitemap.xml; Search Console may still point at it.
+/sitemap.xml    /sitemap-index.xml    301
+# Browsers request /favicon.ico by default.
+/favicon.ico    /favicon-32.png       200
