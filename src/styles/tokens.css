@@ -1,0 +1,56 @@
+/*
+ * Design tokens from the brand system (BRAND.md §5). Components use these
+ * variables only, never raw hex values, so dark mode can later be a second
+ * set of the same variables.
+ */
+:root {
+  color-scheme: light;
+
+  --color-paper: #f6f6f2;
+  --color-grid-line: #e7e7e0;
+  --color-surface: #ffffff;
+  --color-border: #d9d9d0;
+  --color-divider: #ecece5;
+  --color-ink: #1b1c1a;
+  --color-ink-body: #3d3e38;
+  --color-ink-muted: #55564f;
+  --color-accent: #2e6b5e;
+  --color-accent-dark: #1f4d43;
+  --color-accent-tint: #e3efec;
+  --color-accent-light: #6fc7b4;
+  --color-hash: #b45309;
+
+  /* Terminal block (dark surface). The prompt gray has little contrast margin
+     (4.97:1 on ink): do not lighten the terminal background. */
+  --color-terminal-text: #e8e8e2;
+  --color-terminal-prompt: #8a8b84;
+
+  /* State chips. Dot colors are decorative and never used as text. */
+  --chip-production-text: var(--color-accent-dark);
+  --chip-production-bg: var(--color-accent-tint);
+  --chip-production-dot: var(--color-accent);
+  --chip-open-source-text: #1e3a8a;
+  --chip-open-source-bg: #e6eefb;
+  --chip-open-source-dot: #2563eb;
+  --chip-pending-release-text: #7a4a06;
+  --chip-pending-release-bg: #fbf0dd;
+  --chip-pending-release-dot: #d08a0b;
+  --chip-archived-text: var(--color-ink-muted);
+  --chip-archived-bg: transparent;
+  --chip-archived-dot: #9a9b93;
+
+  --radius: 6px;
+  --radius-pill: 999px;
+  --grid-size: 24px;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3.5rem;
+  --space-8: 5.5rem;
+
+  --content-width: 65rem;
+}

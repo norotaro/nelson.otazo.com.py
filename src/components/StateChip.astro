@@ -1,0 +1,68 @@
+---
+import type { ProjectState } from '../lib/project-state';
+
+interface Props {
+  state: ProjectState;
+}
+
+const { state } = Astro.props;
+const variant = state === 'current-role' ? 'production' : state;
+---
+
+<span class={`chip chip--${variant}`}>
+  <span class="chip__dot" aria-hidden="true"></span>state: {state}
+</span>
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) 0.625rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .chip__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex: none;
+  }
+
+  .chip--production {
+    color: var(--chip-production-text);
+    background: var(--chip-production-bg);
+  }
+  .chip--production .chip__dot {
+    background: var(--chip-production-dot);
+  }
+
+  .chip--open-source {
+    color: var(--chip-open-source-text);
+    background: var(--chip-open-source-bg);
+  }
+  .chip--open-source .chip__dot {
+    background: var(--chip-open-source-dot);
+  }
+
+  .chip--pending-release {
+    color: var(--chip-pending-release-text);
+    background: var(--chip-pending-release-bg);
+  }
+  .chip--pending-release .chip__dot {
+    background: var(--chip-pending-release-dot);
+  }
+
+  .chip--archived {
+    padding-inline: 0;
+    color: var(--chip-archived-text);
+    background: var(--chip-archived-bg);
+  }
+  .chip--archived .chip__dot {
+    background: var(--chip-archived-dot);
+  }
+</style>
