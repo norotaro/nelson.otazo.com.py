@@ -110,6 +110,16 @@ for (const slug of slugs) {
   const post = read(`blog/post/${slug}.html`);
   if (post && !post.includes('<html lang="es"')) errors.push(`blog/post/${slug}.html: not lang="es"`);
 }
+// Covers are the largest paint on a post: serve resized copies with fixed dimensions.
+for (const slug of slugs) {
+  const source = readFileSync(new URL(`../src/content/blog/${slug}.md`, import.meta.url), 'utf8');
+  if (!/^img: /m.test(source)) continue;
+  const cover = read(`blog/post/${slug}.html`).match(/<img\b[^>]*class="post__cover"[^>]*>/)?.[0] ?? '';
+  if (!(/src="\/_astro\//.test(cover) && /width="\d+"/.test(cover) && /srcset=/.test(cover))) {
+    errors.push(`blog/post/${slug}.html: cover is not an optimized, sized image`);
+  }
+}
+
 const listed = [];
 for (let page = 1; page <= Math.ceil(slugs.length / 5); page++) {
   const html = read(`blog/page/${page}.html`);
