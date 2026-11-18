@@ -72,6 +72,25 @@ for (const [label, pattern, expected] of expectations) {
   if (found !== expected) errors.push(`index.html: expected ${expected} ${label}, found ${found}`);
 }
 
+// Experience CHANGELOG: one release per job in the home git log, one open-ended
+// current role, and the same start dates as the home page.
+const startDates = (html, pattern) => [...html.matchAll(pattern)].map(([, date]) => date).sort();
+let experience = '';
+try {
+  experience = readFileSync(join(dist, 'experience.html'), 'utf8');
+} catch {
+  errors.push('experience.html: missing');
+}
+if (experience) {
+  const homeDates = startDates(home, /<time class="log__date" datetime="(\d{4}-\d{2})"/g);
+  const releaseDates = startDates(experience, /<time class="release__start" datetime="(\d{4}-\d{2})"/g);
+  if (homeDates.join() !== releaseDates.join()) {
+    errors.push(`experience.html: release dates [${releaseDates}] differ from the home git log [${homeDates}]`);
+  }
+  const current = (experience.match(/→ now\]/g) ?? []).length;
+  if (current !== 1) errors.push(`experience.html: expected 1 "→ now]" release, found ${current}`);
+}
+
 // The availability line belongs to English pages only.
 for (const file of files) {
   const html = readFileSync(file, 'utf8');

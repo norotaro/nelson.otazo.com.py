@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getJobs } from '../lib/career';
+
+const jobs = await getJobs();
+
+/** `2024-07` → `2024.07`, the CHANGELOG version style. */
+const version = (yearMonth: string) => yearMonth.replace('-', '.');
+---
+
+<BaseLayout
+  title="Experience · Nelson Otazo"
+  description="Career changelog of Nelson Otazo, from intern in 2008 to senior full-stack engineer working with Laravel and Vue."
+  lang="en"
+>
+  <article class="changelog">
+    <header class="changelog__head">
+      <h1 class="mono">CHANGELOG.md</h1>
+      <p>All notable changes to my career, newest first. Each release is one job, dated by its first and last month.</p>
+    </header>
+
+    <div class="card changelog__body">
+      {
+        jobs.map((job) => (
+          <section class="release" id={job.id} aria-labelledby={`${job.id}-title`}>
+            <h2 class="release__title mono" id={`${job.id}-title`}>
+              <span class="release__marker" aria-hidden="true">## </span>
+              <span class="release__version">
+                [<time class="release__start" datetime={job.start}>{version(job.start)}</time> →{' '}
+                {job.end ? <time class="release__end" datetime={job.end}>{version(job.end)}</time> : 'now'}]
+              </span>{' '}
+              <span class="release__name">{job.name}</span>
+            </h2>
+            <p class="release__meta mono">
+              {job.role} · {job.employer} · {job.location}
+            </p>
+
+            {job.added.length === 0 && job.changed.length === 0 && <p>{job.summary}</p>}
+
+            {job.added.length > 0 && (
+              <>
+                <h3 class="release__group mono">
+                  <span class="release__marker" aria-hidden="true">### </span>Added
+                </h3>
+                <ul>
+                  {job.added.map((item) => <li>{item}</li>)}
+                </ul>
+              </>
+            )}
+
+            {job.changed.length > 0 && (
+              <>
+                <h3 class="release__group mono">
+                  <span class="release__marker" aria-hidden="true">### </span>Changed
+                </h3>
+                <ul>
+                  {job.changed.map((item) => <li>{item}</li>)}
+                </ul>
+              </>
+            )}
+
+            {job.stack.length > 0 && <p class="release__stack mono">stack: {job.stack.join(' ')}</p>}
+          </section>
+        ))
+      }
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .changelog {
+    padding-block: var(--space-7);
+    max-width: 50rem;
+  }
+
+  .changelog__head {
+    margin-bottom: var(--space-6);
+  }
+
+  .changelog__head h1 {
+    margin-bottom: var(--space-3);
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+  }
+
+  .changelog__head p {
+    max-width: 40rem;
+    color: var(--color-ink-muted);
+  }
+
+  .changelog__body {
+    padding: 0 var(--space-5);
+  }
+
+  .release {
+    padding-block: var(--space-5);
+    border-bottom: 1px solid var(--color-divider);
+    scroll-margin-top: var(--space-5);
+  }
+
+  .release:last-child {
+    border-bottom: 0;
+  }
+
+  .release__title {
+    margin-bottom: var(--space-1);
+    font-size: 1.125rem;
+  }
+
+  /* Wrap between the version and the name, never inside a slug or after a lone arrow. */
+  .release__version,
+  .release__name {
+    white-space: nowrap;
+  }
+
+  .release__marker {
+    color: var(--color-ink-muted);
+    font-weight: 400;
+  }
+
+  .release__version {
+    color: var(--color-accent);
+  }
+
+  .release__meta {
+    margin-bottom: var(--space-4);
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+  }
+
+  .release__group {
+    margin-block: var(--space-4) var(--space-2);
+    font-size: 0.9375rem;
+  }
+
+  .release ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--color-ink-body);
+  }
+
+  .release li + li {
+    margin-top: var(--space-1);
+  }
+
+  .release__stack {
+    margin-top: var(--space-4);
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+  }
+
+  @media (max-width: 47.99rem) {
+    .changelog__body {
+      padding: 0 var(--space-4);
+    }
+
+    .release__title {
+      font-size: 1rem;
+    }
+  }
+</style>
