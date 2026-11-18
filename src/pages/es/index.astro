@@ -1,5 +1,6 @@
 ---
 import LatestPosts from '../../components/home/LatestPosts.astro';
+import Whoami from '../../components/Whoami.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const links = [
@@ -10,13 +11,14 @@ const links = [
 
 <BaseLayout
   title="Nelson Otazo · Ingeniero de software"
-  description="Desarrollo software desde 2009. Hoy construyo y mantengo Teuka junto a Derlis Gómez."
+  description="Desarrollo software desde 2009. Hoy construyo y mantengo Teuka, una plataforma para congresos científicos."
   lang="es"
 >
   <section class="es-home">
+    <Whoami answer="esposo, padre y desarrollador" />
     <h1 class="mono">Nelson Otazo</h1>
     <p class="es-home__headline mono">Ingeniero de software full-stack · Laravel · Vue</p>
-    <p class="es-home__lead">Desarrollo software desde 2009. Hoy construyo y mantengo Teuka junto a Derlis Gómez.</p>
+    <p class="es-home__lead">Desarrollo software desde 2009. Hoy construyo y mantengo Teuka.</p>
     <p class="es-home__context">
       Vivo en Asunción y trabajo de forma remota con equipos de Estados Unidos. Mi experiencia profesional está detallada{' '}
       <a href="/experience" hreflang="en">en inglés</a>.

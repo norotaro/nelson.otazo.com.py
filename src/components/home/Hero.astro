@@ -1,4 +1,6 @@
 ---
+import Whoami from '../Whoami.astro';
+
 const links = [
   { href: 'https://www.linkedin.com/in/nelson-otazo/', label: 'linkedin' },
   { href: 'https://github.com/norotaro', label: 'github' },
@@ -6,11 +8,7 @@ const links = [
 ---
 
 <header class="hero">
-  <!-- The only terminal block on the site, by design: do not reuse it elsewhere. -->
-  <div class="terminal mono" role="group" aria-label="whoami">
-    <span><span class="terminal__host">nelson@asuncion</span><span class="terminal__prompt">:~$</span> whoami</span>
-    <span>husband, father &amp; developer</span>
-  </div>
+  <Whoami answer="husband, father & developer" />
 
   <h1 class="hero__name">Nelson Otazo</h1>
   <p class="hero__headline mono">Senior Full-Stack Engineer · Laravel · Vue</p>
@@ -29,26 +27,6 @@ const links = [
   .hero {
     padding-block: var(--space-8) var(--space-7);
     max-width: 54rem;
-  }
-
-  .terminal {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 0.375rem;
-    margin-bottom: var(--space-6);
-    padding: 0.875rem 1.125rem;
-    background: var(--color-ink);
-    color: var(--color-terminal-text);
-    border-radius: var(--radius);
-    font-size: 0.875rem;
-  }
-
-  .terminal__host {
-    color: var(--color-accent-light);
-  }
-
-  .terminal__prompt {
-    color: var(--color-terminal-prompt);
   }
 
   .hero__name {

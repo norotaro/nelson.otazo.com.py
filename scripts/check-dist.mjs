@@ -59,6 +59,14 @@ for (const file of files) {
   }
 }
 
+// The terminal moment lives on the two home pages only.
+for (const file of files) {
+  const page = relative(dist, file);
+  const terminals = (readFileSync(file, 'utf8').match(/class="terminal /g) ?? []).length;
+  const expected = page === 'index.html' || page === 'es.html' ? 1 : 0;
+  if (terminals !== expected) errors.push(`${page}: expected ${expected} whoami terminal, found ${terminals}`);
+}
+
 // Home page structure: one terminal moment, one current role, one initial commit.
 const home = readFileSync(join(dist, 'index.html'), 'utf8');
 const count = (pattern) => (home.match(pattern) ?? []).length;
