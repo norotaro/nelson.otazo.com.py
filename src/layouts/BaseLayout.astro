@@ -27,9 +27,9 @@ const { title, description, lang, ogImage, noindex } = Astro.props;
   </head>
   <body>
     <a class="skip-link" href="#main">{t(lang, 'skip')}</a>
-    <div class="container site-header">
+    <header class="container site-header">
       <SiteNav lang={lang} />
-    </div>
+    </header>
     <main id="main" class="container" tabindex="-1">
       <slot />
     </main>
