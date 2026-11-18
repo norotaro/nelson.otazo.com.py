@@ -1,14 +1,16 @@
 ---
 import StateChip from './StateChip.astro';
+import type { Locale } from '../i18n/ui';
 import type { Project } from '../lib/projects';
 
 interface Props {
   project: Project;
   /** Heading level inside the page outline. */
   level?: 'h2' | 'h3';
+  lang?: Locale;
 }
 
-const { project, level: Heading = 'h3' } = Astro.props;
+const { project, level: Heading = 'h3', lang = 'en' } = Astro.props;
 const href = project.page ?? project.url;
 ---
 
@@ -19,7 +21,7 @@ const href = project.page ?? project.url;
     </Heading>
     <StateChip state={project.state} />
   </div>
-  <p class="project__summary">{project.summary}</p>
+  <p class="project__summary">{lang === 'es' ? project.summaryEs : project.summary}</p>
   <p class="project__stack mono">{project.stack.join(' ')}</p>
 </article>
 

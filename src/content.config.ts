@@ -26,6 +26,8 @@ const experience = defineCollection({
       end: yearMonth.optional(),
       /** One-line git log message. */
       summary: z.string(),
+      /** The same message for the Spanish home. */
+      summaryEs: z.string(),
       added: z.array(z.string()).default([]),
       changed: z.array(z.string()).default([]),
       stack: z.array(z.string()).default([]),
@@ -41,6 +43,8 @@ const projects = defineCollection({
     name: z.string(),
     state: z.enum(PROJECT_STATES),
     summary: z.string(),
+    /** Spanish summary for the Spanish home; Teuka's must not present it as one person's work. */
+    summaryEs: z.string(),
     stack: z.array(z.string()).default([]),
     url: z.url().optional(),
     /** Case study on this site; the card links here instead of `url`. */

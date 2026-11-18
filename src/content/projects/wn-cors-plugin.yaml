@@ -1,5 +1,6 @@
 name: wn-cors-plugin
 state: archived
 summary: "WinterCMS plugin: Send CORS headers."
+summaryEs: "Plugin de WinterCMS: envía cabeceras CORS."
 stack: [php, wintercms]
 url: https://github.com/norotaro/wn-cors-plugin

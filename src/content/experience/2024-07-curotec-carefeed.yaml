@@ -5,6 +5,7 @@ role: Senior Engineer (Full-Stack)
 location: Remote
 start: 2024-07
 summary: Senior Engineer (Full-Stack)
+summaryEs: "Senior Engineer (Full-Stack)"
 added:
   - LLM-powered analysis of hospital referral documents for admissions teams.
   - Led an EHR integration from discovery spike to production, syncing nightly and on real-time events.

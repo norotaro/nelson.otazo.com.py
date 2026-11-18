@@ -1,5 +1,12 @@
 ---
 import Whoami from '../Whoami.astro';
+import { t, type Locale } from '../../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
 
 const links = [
   { href: 'https://www.linkedin.com/in/nelson-otazo/', label: 'linkedin' },
@@ -8,18 +15,15 @@ const links = [
 ---
 
 <header class="hero">
-  <Whoami answer="husband, father & developer" />
+  <Whoami answer={t(lang, 'home.whoami')} />
 
   <h1 class="hero__name">Nelson Otazo</h1>
-  <p class="hero__headline mono">Senior Full-Stack Engineer · Laravel · Vue</p>
-  <p class="hero__positioning">I build and own production software end to end, including the AI parts.</p>
-  <p class="hero__context">
-    15+ years shipping web products. Based in Asunción, Paraguay, working remotely with US teams.
-  </p>
+  <p class="hero__headline mono">{t(lang, 'home.headline')}</p>
+  <p class="hero__positioning">{t(lang, 'home.positioning')}</p>
+  <p class="hero__context">{t(lang, 'home.context')}</p>
 
   <div class="hero__actions mono">
     {links.map((link) => <a class="button" href={link.href}>{link.label}</a>)}
-    <span class="hero__availability"><span class="hero__dot" aria-hidden="true">●</span> open to senior remote roles</span>
   </div>
 </header>
 
@@ -64,12 +68,4 @@ const links = [
     font-size: 0.875rem;
   }
 
-  .hero__availability {
-    padding-left: var(--space-2);
-    color: var(--color-ink-muted);
-  }
-
-  .hero__dot {
-    color: var(--color-accent);
-  }
 </style>

@@ -1,16 +1,23 @@
 ---
+import { t, type Locale } from '../../i18n/ui';
 import { getPosts, isoDate, postUrl } from '../../lib/blog';
 
 interface Props {
+  lang: Locale;
   limit?: number;
 }
 
-const { limit = 2 } = Astro.props;
+const { lang, limit = 2 } = Astro.props;
 const posts = (await getPosts()).slice(0, limit);
 ---
 
 <section class="posts" aria-labelledby="posts-title">
-  <h2 id="posts-title" class="section-label">// blog · <span lang="es">escribo en español</span></h2>
+  <div class="posts__head">
+    <h2 id="posts-title" class="section-label">
+      {lang === 'es' ? '// blog' : <>// blog · <span lang="es">escribo en español</span></>}
+    </h2>
+    <a class="mono posts__more" href="/blog/page/1" hreflang={lang === 'en' ? 'es' : undefined}>{t(lang, 'blog.more')}</a>
+  </div>
   <ul class="card post-list" role="list">
     {
       posts.map((post) => (
@@ -30,6 +37,23 @@ const posts = (await getPosts()).slice(0, limit);
 <style>
   .posts {
     margin-top: var(--space-7);
+  }
+
+  .posts__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .posts__head .section-label {
+    margin-bottom: 0;
+  }
+
+  .posts__more {
+    font-size: 0.875rem;
   }
 
   .post-list {

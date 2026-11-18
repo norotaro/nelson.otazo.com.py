@@ -1,5 +1,6 @@
 name: wn-guardian-plugin
 state: archived
 summary: "WinterCMS plugin: Restrict access to routes."
+summaryEs: "Plugin de WinterCMS: restringe el acceso a rutas."
 stack: [php, wintercms]
 url: https://github.com/norotaro/wn-guardian-plugin

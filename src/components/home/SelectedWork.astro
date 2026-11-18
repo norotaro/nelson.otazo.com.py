@@ -1,20 +1,29 @@
 ---
 import ProjectCard from '../ProjectCard.astro';
 import StateChip from '../StateChip.astro';
+import { t, type Locale } from '../../i18n/ui';
 import { getProjects } from '../../lib/projects';
 
-const { featured, archived } = await getProjects();
+interface Props {
+  lang: Locale;
+  /** Project ids shown elsewhere on the page. */
+  exclude?: string[];
+}
+
+const { lang, exclude = [] } = Astro.props;
+const { archived, ...projects } = await getProjects();
+const featured = projects.featured.filter((project) => !exclude.includes(project.id));
 const shownArchived = archived.slice(0, 3);
 const moreArchived = archived.length - shownArchived.length;
 ---
 
 <section id="work" aria-labelledby="work-title">
-  <h2 id="work-title" class="section-label">// selected work</h2>
+  <h2 id="work-title" class="section-label">{t(lang, 'work.label')}</h2>
 
   <div class="cards">
     {
       featured.map((project) => (
-        <ProjectCard project={project} />
+        <ProjectCard project={project} lang={lang} />
       ))
     }
   </div>
@@ -27,7 +36,9 @@ const moreArchived = archived.length - shownArchived.length;
           <a href={project.url}>{project.name}</a>
         ))}
         {moreArchived > 0 && (
-          <a href="/open-source#archived">+{moreArchived} WinterCMS plugins</a>
+          <a href="/open-source#archived" hreflang={lang === 'es' ? 'en' : undefined}>
+            +{moreArchived} {t(lang, 'work.moreArchived')}
+          </a>
         )}
       </div>
     )

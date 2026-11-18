@@ -75,7 +75,6 @@ const expectations = [
   ['(HEAD → current) ref', /\(HEAD → current\)/g, 1],
   ['(tag: v0.1) ref', /\(tag: v0\.1\)/g, 1],
   ['// selected work section', /\/\/ selected work/g, 1],
-  ['availability line', /open to senior remote roles/g, 1],
 ];
 for (const [label, pattern, expected] of expectations) {
   const found = count(pattern);
@@ -166,13 +165,6 @@ for (const page of ['es.html', 'es/teuka.html']) {
   if (/en solitario|por mi cuenta|una sola persona|\b(yo|él) solo\b/i.test(visibleText(read(page)))) errors.push(`${page}: presents Teuka as a solo effort`);
 }
 
-// The availability line belongs to English pages only.
-for (const file of files) {
-  const html = readFileSync(file, 'utf8');
-  if (html.includes('<html lang="es"') && html.includes('open to senior remote roles')) {
-    errors.push(`${relative(dist, file)}: availability line on a Spanish page`);
-  }
-}
 
 if (errors.length) {
   console.error(errors.join('\n'));
