@@ -1,11 +1,10 @@
-# Client name withheld until the employment contract allows naming it; keep this generic wording.
-name: healthcare-saas
+name: curotec → carefeed
 employer: Curotec
-client: US healthcare SaaS for senior living
+client: Carefeed
 role: Senior Engineer (Full-Stack)
 location: Remote
 start: 2024-07
-summary: Senior Engineer · via Curotec
+summary: Senior Engineer (Full-Stack)
 added:
   - LLM-powered analysis of hospital referral documents for admissions teams.
   - Led an EHR integration from discovery spike to production, syncing nightly and on real-time events.

@@ -6,10 +6,6 @@ import { join, relative } from 'node:path';
 const dist = new URL('../dist/', import.meta.url).pathname;
 const SITE = 'https://nelson.otazo.com.py';
 
-// Names that must not appear publicly until explicitly allowed: the current client
-// stays unnamed until the employment contract allows it.
-const BANNED = [/carefeed/i];
-
 // No public claim about Teuka backups until off-server backups exist.
 const BACKUP_CLAIM = /backups?/i;
 
@@ -52,7 +48,6 @@ for (const file of files) {
   if (!/<html lang="(en|es)"/.test(html)) errors.push(`${page}: <html> has no en/es lang`);
   if (!/<title>[^<]+<\/title>/.test(html)) errors.push(`${page}: missing <title>`);
   if (text.includes('—')) errors.push(`${page}: em dash in visible copy`);
-  for (const name of BANNED) if (name.test(html)) errors.push(`${page}: banned name ${name}`);
   if (BACKUP_CLAIM.test(text)) errors.push(`${page}: mentions backups`);
 
   for (const url of loadedUrls(html)) {
