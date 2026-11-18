@@ -150,21 +150,23 @@ for (const page of ['open-source.html', 'es/codigo-abierto.html']) {
 }
 
 // Translated pages point at each other, so the language switch always has a target.
-for (const [en, es] of [['experience.html', 'es/experiencia.html'], ['open-source.html', 'es/codigo-abierto.html']]) {
+for (const [en, es] of [
+  ['experience.html', 'es/experiencia.html'],
+  ['open-source.html', 'es/codigo-abierto.html'],
+  ['projects/teuka.html', 'es/proyectos/teuka.html'],
+]) {
   const esPath = `/${es.replace(/\.html$/, '')}`;
   if (!read(en).includes(`hreflang="es" href="${SITE}${esPath}"`)) errors.push(`${en}: no hreflang link to ${esPath}`);
 }
 
-// Teuka pages are separate messages for separate audiences, never alternates.
-const teukaEn = read('projects/teuka.html');
+// /es/teuka is a page for prospects with no English counterpart; the case study
+// is paired with its own translation instead.
 const teukaEs = read('es/teuka.html');
-for (const [page, html] of [['projects/teuka.html', teukaEn], ['es/teuka.html', teukaEs]]) {
-  if (/hreflang="(en|es)" href="[^"]*\/(projects|es)\/teuka"/.test(html)) errors.push(`${page}: paired as a language alternate`);
-}
+if (/rel="alternate" hreflang=/.test(teukaEs)) errors.push('es/teuka.html: paired as a language alternate');
 if (teukaEs && !teukaEs.includes('Derlis Gómez')) errors.push('es/teuka.html: must present Nelson and Derlis together');
 
 // Spanish pages speak to Teuka prospects: "built solo" reads as "one person who may leave".
-for (const page of ['es.html', 'es/teuka.html']) {
+for (const page of ['es.html', 'es/teuka.html', 'es/proyectos/teuka.html']) {
   // Plain "solo" also means "only" in Spanish, so match the phrases that mean "by myself".
   if (/en solitario|por mi cuenta|una sola persona|\b(yo|él) solo\b/i.test(visibleText(read(page)))) errors.push(`${page}: presents Teuka as a solo effort`);
 }

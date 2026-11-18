@@ -1,0 +1,290 @@
+---
+import StateChip from './StateChip.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+type Section = { id: string; label: string; intro?: string; items?: string[]; outro?: string };
+
+const { lang } = Astro.props;
+
+/*
+ * The Spanish version is also read by Teuka prospects, who weigh continuity: it states
+ * who builds and who sells instead of "built solo", which reads as "one person who may leave".
+ */
+const copy = {
+  en: {
+    title: 'Teuka case study · Nelson Otazo',
+    description:
+      'How I built and run Teuka solo: a multi-tenant Laravel SaaS for scientific conferences, with hand-rolled tenancy, ~290 test files and automated deploys.',
+    back: { href: '/#work', label: '← /work' },
+    lead: 'A multi-tenant SaaS for scientific conferences: abstract submission, double-blind peer review, registrations, payments and certificates. I built it and run it solo, from the database schema to the deploy pipeline.',
+    closed: 'closed source',
+    facts: [
+      ['started', 'first commit in August 2025; in production today'],
+      ['stack', 'PHP 8.5 · Laravel 13 · Filament 5 · Livewire 4 · Octane on FrankenPHP · PostgreSQL'],
+      ['tests', '~290 Pest test files, feature and unit, plus architecture rules'],
+      ['team', 'built and run solo; sales by a partner'],
+    ],
+    sections: [
+      {
+        id: 'architecture',
+        label: '// architecture',
+        intro:
+          'A modular monolith. Each business area is a module with its own models, migrations, policies and tests: abstracts, evaluations, conferences, registrations, payments, certificates, users and organizations. Four Filament panels sit on top, one per kind of user: platform admin, organization admin, conference participants and reviewers.',
+        items: [
+          'Payment gateways plug in behind one interface, so adding a gateway does not touch registrations. A local online-payment gateway runs in production.',
+          'Certificates are rendered to PDF on request and sent as signed links, so no generated file is stored.',
+          'Pest architecture rules keep the boundaries honest, for example "payment partners never reach the presentation layer" and "no Eloquent model lives outside a Models namespace".',
+        ],
+      },
+      {
+        id: 'tenancy',
+        label: '// multi-tenancy',
+        intro:
+          'Hand-rolled, without a tenancy package: one PostgreSQL database where every tenant-owned row carries its organization, and every isolation rule lives in application code covered by tests.',
+        items: [
+          "The organization is resolved from an exact match on the request host. The match is deliberately not normalized: a looser match could hand one organization's pages to another.",
+          'Eloquent global scopes filter every query by organization, and role scopes narrow it further: participants see their own submissions, reviewers only the abstracts assigned to them.',
+          'Policies check the organization again, and panels answer 404 when no organization resolves.',
+        ],
+      },
+      {
+        id: 'review',
+        label: '// double-blind review',
+        intro:
+          'Reviewers never see who wrote an abstract, and authors never see who reviewed it. Only the organizing committee sees both. This is enforced by policies and by what each panel renders, not by convention.',
+      },
+      {
+        id: 'testing',
+        label: '// testing',
+        items: [
+          '~290 Pest test files: feature tests through the panels and HTTP layer, unit tests for the domain.',
+          'Guards for the failures that hurt in production: migration rollbacks, route caching and N+1 queries.',
+          'Every pull request runs the suite in parallel against PostgreSQL, plus Pint for code style.',
+          'Larastan (level 5) runs locally before changes go up.',
+        ],
+        outro:
+          'I work with AI coding agents every day. The test suite and the architecture rules are what make that fast without making it reckless.',
+      },
+      {
+        id: 'delivery',
+        label: '// delivery',
+        items: [
+          'Every merge to main builds a Docker image on FrankenPHP, pushes it to the GitHub container registry and deploys it through Coolify.',
+          'Supervisor runs Octane, the queue worker and the scheduler inside the container.',
+          'Sentry reports errors and Laravel Pulse tracks performance in production.',
+        ],
+      },
+    ] as Section[],
+  },
+  es: {
+    title: 'Teuka, caso de estudio · Nelson Otazo',
+    description:
+      'Cómo está construida Teuka: un SaaS multi-organización en Laravel para congresos científicos, con aislamiento propio entre organizaciones, ~290 archivos de pruebas y despliegues automatizados.',
+    back: { href: '/es/teuka', label: '← /teuka' },
+    lead: 'Un SaaS multi-organización para congresos científicos: envío de resúmenes, revisión por pares doble ciego, inscripciones, pagos y certificados. Lo desarrollo y lo opero de punta a punta, desde el esquema de la base de datos hasta el pipeline de despliegue.',
+    closed: 'código cerrado',
+    facts: [
+      ['inicio', 'primer commit en agosto de 2025; hoy en producción'],
+      ['stack', 'PHP 8.5 · Laravel 13 · Filament 5 · Livewire 4 · Octane sobre FrankenPHP · PostgreSQL'],
+      ['pruebas', '~290 archivos de pruebas con Pest, de funcionalidad y unitarias, más reglas de arquitectura'],
+      ['equipo', 'Nelson la desarrolla y opera; Derlis Gómez atiende a los comités organizadores'],
+    ],
+    sections: [
+      {
+        id: 'architecture',
+        label: '// arquitectura',
+        intro:
+          'Un monolito modular. Cada área del negocio es un módulo con sus propios modelos, migraciones, políticas y pruebas: resúmenes, evaluaciones, congresos, inscripciones, pagos, certificados, usuarios y organizaciones. Encima hay cuatro paneles de Filament, uno por tipo de usuario: administración de la plataforma, administración de cada organización, participantes del congreso y revisores.',
+        items: [
+          'Las pasarelas de pago se conectan detrás de una única interfaz, así que agregar una pasarela no toca las inscripciones. En producción funciona una pasarela de pago en línea local.',
+          'Los certificados se generan en PDF cuando se piden y se envían como enlaces firmados, así que no se guarda ningún archivo generado.',
+          'Reglas de arquitectura en Pest mantienen los límites, por ejemplo "los socios de pago nunca llegan a la capa de presentación" y "ningún modelo de Eloquent vive fuera de un namespace Models".',
+        ],
+      },
+      {
+        id: 'tenancy',
+        label: '// multi-organización',
+        intro:
+          'Hecho a medida, sin un paquete de tenancy: una sola base de datos PostgreSQL donde cada fila de una organización lleva su organización, y cada regla de aislamiento vive en código de la aplicación cubierto por pruebas.',
+        items: [
+          'La organización se resuelve con una coincidencia exacta del dominio de la solicitud. A propósito no se normaliza: una coincidencia más laxa podría mostrar las páginas de una organización a otra.',
+          'Scopes globales de Eloquent filtran cada consulta por organización, y scopes por rol la acotan más: los participantes ven sus propios envíos y los revisores solo los resúmenes que tienen asignados.',
+          'Las políticas vuelven a verificar la organización, y los paneles responden 404 cuando no se resuelve ninguna organización.',
+        ],
+      },
+      {
+        id: 'review',
+        label: '// revisión doble ciego',
+        intro:
+          'Los revisores nunca ven quién escribió un resumen, y los autores nunca ven quién lo revisó. Solo el comité organizador ve ambas cosas. Lo aplican las políticas y lo que muestra cada panel, no una convención.',
+      },
+      {
+        id: 'testing',
+        label: '// pruebas',
+        items: [
+          '~290 archivos de pruebas con Pest: pruebas de funcionalidad a través de los paneles y la capa HTTP, y pruebas unitarias del dominio.',
+          'Protecciones contra los fallos que más duelen en producción: rollbacks de migraciones, caché de rutas y consultas N+1.',
+          'Cada pull request ejecuta la suite en paralelo contra PostgreSQL, además de Pint para el estilo de código.',
+          'Larastan (nivel 5) se ejecuta localmente antes de subir los cambios.',
+        ],
+        outro:
+          'Trabajo con agentes de IA para programar todos los días. La suite de pruebas y las reglas de arquitectura son lo que permite ir rápido sin ser imprudente.',
+      },
+      {
+        id: 'delivery',
+        label: '// despliegue',
+        items: [
+          'Cada merge a main construye una imagen de Docker sobre FrankenPHP, la sube al registro de contenedores de GitHub y la despliega con Coolify.',
+          'Supervisor ejecuta Octane, el worker de colas y el scheduler dentro del contenedor.',
+          'Sentry reporta errores y Laravel Pulse mide el rendimiento en producción.',
+        ],
+      },
+    ] as Section[],
+  },
+}[lang];
+---
+
+<BaseLayout title={copy.title} description={copy.description} lang={lang}>
+  <article class="case">
+    <header class="case__head">
+      <p class="case__path mono"><a href={copy.back.href}>{copy.back.label}</a></p>
+      <div class="case__title">
+        <h1 class="mono">teuka</h1>
+        <StateChip state="production" />
+      </div>
+      <p class="case__lead">{copy.lead}</p>
+      <p class="case__links mono">
+        <a href="https://teuka.app">teuka.app</a> · {copy.closed}
+      </p>
+    </header>
+
+    <dl class="card facts mono">
+      {
+        copy.facts.map(([term, detail]) => (
+          <div class="facts__row">
+            <dt>{term}</dt>
+            <dd>{detail}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    {
+      copy.sections.map((section) => (
+        <section aria-labelledby={section.id}>
+          <h2 id={section.id} class="section-label">
+            {section.label}
+          </h2>
+          {section.intro && <p>{section.intro}</p>}
+          {section.items && (
+            <ul>
+              {section.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+          {section.outro && <p>{section.outro}</p>}
+        </section>
+      ))
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  .case {
+    padding-block: var(--space-7);
+    max-width: 48rem;
+  }
+
+  .case__head {
+    margin-bottom: var(--space-6);
+  }
+
+  .case__path {
+    margin-bottom: var(--space-5);
+    font-size: 0.875rem;
+  }
+
+  .case__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .case__title h1 {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+  }
+
+  .case__lead {
+    margin-bottom: var(--space-3);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .case__links {
+    font-size: 0.875rem;
+    color: var(--color-ink-muted);
+  }
+
+  .facts {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-7);
+    padding: var(--space-4) var(--space-5);
+    font-size: 0.8125rem;
+  }
+
+  .facts__row {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: var(--space-3);
+  }
+
+  .facts dt {
+    color: var(--color-ink-muted);
+  }
+
+  .facts dd {
+    margin: 0;
+  }
+
+  section {
+    margin-bottom: var(--space-7);
+  }
+
+  section p,
+  section li {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-ink-body);
+  }
+
+  section p + ul,
+  section ul + p {
+    margin-top: var(--space-4);
+  }
+
+  section ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  section li + li {
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 30rem) {
+    .facts__row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

@@ -2,14 +2,15 @@ import type { Locale } from './ui';
 
 /*
  * Pages that are translations of each other. Pairing is explicit on purpose:
- * `/projects/teuka` (recruiters) and `/es/teuka` (Teuka prospects) carry
- * different messages for different audiences and must never be linked as
- * alternates. Spanish blog posts live at unprefixed `/blog/...` and have no pair.
+ * `/es/teuka` (Teuka prospects) has no English counterpart; the technical case
+ * study `/projects/teuka` is paired with `/es/proyectos/teuka` instead.
+ * Spanish blog posts live at unprefixed `/blog/...` and have no pair.
  */
 const PAIRS: ReadonlyArray<Record<Locale, string>> = [
   { en: '/', es: '/es' },
   { en: '/experience', es: '/es/experiencia' },
   { en: '/open-source', es: '/es/codigo-abierto' },
+  { en: '/projects/teuka', es: '/es/proyectos/teuka' },
 ];
 
 export type Alternate = { locale: Locale; path: string };
