@@ -1,0 +1,213 @@
+---
+import StateChip from '../../components/StateChip.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const facts = [
+  ['started', 'first commit in August 2025; in production today'],
+  ['stack', 'PHP 8.5 · Laravel 13 · Filament 5 · Livewire 4 · Octane on FrankenPHP · PostgreSQL'],
+  ['tests', '~290 Pest test files, feature and unit, plus architecture rules'],
+  ['team', 'built and run solo; sales by a partner'],
+];
+---
+
+<BaseLayout
+  title="Teuka case study · Nelson Otazo"
+  description="How I built and run Teuka solo: a multi-tenant Laravel SaaS for scientific conferences, with hand-rolled tenancy, ~290 test files and automated deploys."
+  lang="en"
+>
+  <article class="case">
+    <header class="case__head">
+      <p class="case__path mono"><a href="/#work">← /work</a></p>
+      <div class="case__title">
+        <h1 class="mono">teuka</h1>
+        <StateChip state="production" />
+      </div>
+      <p class="case__lead">
+        A multi-tenant SaaS for scientific conferences: abstract submission, double-blind peer review, registrations,
+        payments and certificates. I built it and run it solo, from the database schema to the deploy pipeline.
+      </p>
+      <p class="case__links mono">
+        <a href="https://teuka.app">teuka.app</a> · closed source
+      </p>
+    </header>
+
+    <dl class="card facts mono">
+      {
+        facts.map(([term, detail]) => (
+          <div class="facts__row">
+            <dt>{term}</dt>
+            <dd>{detail}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <section aria-labelledby="architecture">
+      <h2 id="architecture" class="section-label">// architecture</h2>
+      <p>
+        A modular monolith. Each business area is a module with its own models, migrations, policies and tests:
+        abstracts, evaluations, conferences, registrations, payments, certificates, users and organizations. Five
+        Filament panels sit on top, one per kind of user: platform admin, organization admin, conference participants,
+        reviewers, and shared pages.
+      </p>
+      <ul>
+        <li>
+          Payment gateways plug in behind one interface, so adding a gateway does not touch registrations. A local
+          online-payment gateway runs in production.
+        </li>
+        <li>Certificates are rendered to PDF on request and sent as signed links, so no generated file is stored.</li>
+        <li>
+          Pest architecture rules keep the boundaries honest, for example "payment partners never reach the
+          presentation layer" and "no Eloquent model lives outside a Models namespace".
+        </li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="tenancy">
+      <h2 id="tenancy" class="section-label">// multi-tenancy</h2>
+      <p>
+        Hand-rolled, without a tenancy package: one PostgreSQL database where every tenant-owned row carries its
+        organization, and every isolation rule lives in application code covered by tests.
+      </p>
+      <ul>
+        <li>
+          The organization is resolved from an exact match on the request host. The match is deliberately not
+          normalized: a looser match could hand one organization's pages to another.
+        </li>
+        <li>
+          Eloquent global scopes filter every query by organization, and role scopes narrow it further: participants
+          see their own submissions, reviewers only the abstracts assigned to them.
+        </li>
+        <li>Policies check the organization again, and panels answer 404 when no organization resolves.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="review">
+      <h2 id="review" class="section-label">// double-blind review</h2>
+      <p>
+        Reviewers never see who wrote an abstract, and authors never see who reviewed it. Only the organizing committee
+        sees both. This is enforced by policies and by what each panel renders, not by convention.
+      </p>
+    </section>
+
+    <section aria-labelledby="testing">
+      <h2 id="testing" class="section-label">// testing</h2>
+      <ul>
+        <li>~290 Pest test files: feature tests through the panels and HTTP layer, unit tests for the domain.</li>
+        <li>Guards for the failures that hurt in production: migration rollbacks, route caching and N+1 queries.</li>
+        <li>Every pull request runs the suite in parallel against PostgreSQL, plus Pint for code style.</li>
+        <li>Larastan (level 5) runs locally before changes go up.</li>
+      </ul>
+      <p>
+        I work with AI coding agents every day. The test suite and the architecture rules are what make that fast
+        without making it reckless.
+      </p>
+    </section>
+
+    <section aria-labelledby="delivery">
+      <h2 id="delivery" class="section-label">// delivery</h2>
+      <ul>
+        <li>
+          Every merge to main builds a Docker image on FrankenPHP, pushes it to the GitHub container registry and
+          deploys it through Coolify.
+        </li>
+        <li>Supervisor runs Octane, the queue worker and the scheduler inside the container.</li>
+        <li>Sentry reports errors and Laravel Pulse tracks performance in production.</li>
+      </ul>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .case {
+    padding-block: var(--space-7);
+    max-width: 48rem;
+  }
+
+  .case__head {
+    margin-bottom: var(--space-6);
+  }
+
+  .case__path {
+    margin-bottom: var(--space-5);
+    font-size: 0.875rem;
+  }
+
+  .case__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .case__title h1 {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+  }
+
+  .case__lead {
+    margin-bottom: var(--space-3);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .case__links {
+    font-size: 0.875rem;
+    color: var(--color-ink-muted);
+  }
+
+  .facts {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-7);
+    padding: var(--space-4) var(--space-5);
+    font-size: 0.8125rem;
+  }
+
+  .facts__row {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: var(--space-3);
+  }
+
+  .facts dt {
+    color: var(--color-ink-muted);
+  }
+
+  .facts dd {
+    margin: 0;
+  }
+
+  section {
+    margin-bottom: var(--space-7);
+  }
+
+  section p,
+  section li {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-ink-body);
+  }
+
+  section p + ul,
+  section ul + p {
+    margin-top: var(--space-4);
+  }
+
+  section ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  section li + li {
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 30rem) {
+    .facts__row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

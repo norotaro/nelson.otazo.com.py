@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+  ['Envío de resúmenes', 'con tipos de trabajo y áreas temáticas configurables, archivos adjuntos e historial de cada estado.'],
+  ['Revisión por pares doble ciego', 'con asignación de revisores y devoluciones a los autores.'],
+  ['Inscripciones y pagos en línea', 'con pasarela de pago local o pago en efectivo.'],
+  ['Certificados', 'para autores, revisores y asistentes, enviados por correo electrónico.'],
+];
+---
+
+<BaseLayout
+  title="Teuka · Las personas detrás de la plataforma"
+  description="Teuka es la plataforma para congresos científicos que construimos y mantenemos Nelson Otazo y Derlis Gómez."
+  lang="es"
+>
+  <article class="trust">
+    <header class="trust__head">
+      <p class="trust__label mono">// teuka.app</p>
+      <h1>Las personas detrás de Teuka</h1>
+      <p class="trust__lead">
+        Teuka es la plataforma para congresos científicos que construimos y mantenemos Nelson Otazo y Derlis Gómez.
+      </p>
+    </header>
+
+    <section class="people" aria-labelledby="people">
+      <h2 id="people" class="section-label">// quiénes somos</h2>
+      <div class="people__grid">
+        <div class="card person">
+          <p class="person__name mono">Derlis Gómez</p>
+          <p>Atiende a los comités organizadores: presenta la plataforma y es su contacto para contratarla.</p>
+        </div>
+        <div class="card person">
+          <p class="person__name mono">Nelson Otazo</p>
+          <p>
+            Desarrolla y opera la plataforma. Desarrolla software desde 2009.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="what">
+      <h2 id="what" class="section-label">// qué hace teuka</h2>
+      <ul class="features">
+        {
+          features.map(([title, detail]) => (
+            <li>
+              <strong>{title}</strong> {detail}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="review">
+      <h2 id="review" class="section-label">// revisión confidencial</h2>
+      <p>
+        Los revisores nunca ven quiénes son los autores. Solo el comité ve quién evaluó cada trabajo. La plataforma lo
+        aplica en cada pantalla; no depende de que alguien lo recuerde.
+      </p>
+    </section>
+
+    <section aria-labelledby="care">
+      <h2 id="care" class="section-label">// cómo la cuidamos</h2>
+      <ul>
+        <li>Cada cambio pasa por cientos de pruebas automáticas antes de llegar a su congreso.</li>
+        <li>Publicamos las mejoras con un proceso automatizado y repetible, el mismo para cada versión.</li>
+        <li>Cada error de la plataforma queda registrado automáticamente, para corregirlo cuanto antes.</li>
+      </ul>
+    </section>
+
+    <section class="cta" aria-labelledby="contact">
+      <h2 id="contact" class="section-label">// ¿organizan un congreso?</h2>
+      <p>
+        Soliciten una demostración en <a href="https://teuka.app">teuka.app</a>.
+      </p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .trust {
+    padding-block: var(--space-7);
+    max-width: 48rem;
+  }
+
+  .trust__head {
+    margin-bottom: var(--space-7);
+  }
+
+  .trust__label {
+    margin-bottom: var(--space-3);
+    font-size: 0.875rem;
+    color: var(--color-ink-muted);
+  }
+
+  .trust__head h1 {
+    margin-bottom: var(--space-4);
+    font-family: var(--font-sans);
+    font-size: clamp(1.875rem, 5vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .trust__lead {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--color-ink-body);
+  }
+
+  section {
+    margin-bottom: var(--space-7);
+  }
+
+  section p,
+  section li {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-ink-body);
+  }
+
+  section ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  section li + li {
+    margin-top: var(--space-2);
+  }
+
+  .features strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .people__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: var(--space-4);
+  }
+
+  .person {
+    padding: var(--space-5);
+  }
+
+  .person__name {
+    margin-bottom: var(--space-2);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .cta {
+    padding: var(--space-5);
+    background: var(--color-accent-tint);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .cta p {
+    color: var(--color-accent-dark);
+  }
+</style>

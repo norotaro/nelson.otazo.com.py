@@ -134,9 +134,18 @@ for (const name of readdirSync(new URL('../src/content/projects/', import.meta.u
   }
 }
 
+// Teuka pages are separate messages for separate audiences, never alternates.
+const teukaEn = read('projects/teuka.html');
+const teukaEs = read('es/teuka.html');
+for (const [page, html] of [['projects/teuka.html', teukaEn], ['es/teuka.html', teukaEs]]) {
+  if (/hreflang="(en|es)" href="[^"]*\/(projects|es)\/teuka"/.test(html)) errors.push(`${page}: paired as a language alternate`);
+}
+if (teukaEs && !teukaEs.includes('Derlis Gómez')) errors.push('es/teuka.html: must present Nelson and Derlis together');
+
 // Spanish pages speak to Teuka prospects: "built solo" reads as "one person who may leave".
 for (const page of ['es.html', 'es/teuka.html']) {
-  if (/\bsolo\b|en solitario|por mi cuenta/i.test(visibleText(read(page)))) errors.push(`${page}: presents Teuka as a solo effort`);
+  // Plain "solo" also means "only" in Spanish, so match the phrases that mean "by myself".
+  if (/en solitario|por mi cuenta|una sola persona|\b(yo|él) solo\b/i.test(visibleText(read(page)))) errors.push(`${page}: presents Teuka as a solo effort`);
 }
 
 // The availability line belongs to English pages only.

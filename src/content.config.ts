@@ -43,6 +43,8 @@ const projects = defineCollection({
     summary: z.string(),
     stack: z.array(z.string()).default([]),
     url: z.url().optional(),
+    /** Case study on this site; the card links here instead of `url`. */
+    page: z.string().startsWith('/').optional(),
     /** Cards on the home page, ascending; archived projects are listed in one row instead. */
     order: z.number().int().optional(),
   }),

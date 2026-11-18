@@ -9,12 +9,13 @@ interface Props {
 }
 
 const { project, level: Heading = 'h3' } = Astro.props;
+const href = project.page ?? project.url;
 ---
 
 <article class="card project">
   <div class="project__head">
     <Heading class="project__name">
-      {project.url ? <a class="link-plain" href={project.url}>{project.name}</a> : project.name}
+      {href ? <a class="link-plain" href={href}>{project.name}</a> : project.name}
     </Heading>
     <StateChip state={project.state} />
   </div>
