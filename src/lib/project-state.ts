@@ -1,4 +1,4 @@
-/** `state:` chip values (BRAND.md §5, State chips). */
+/** `state:` chip values; each has its own colors in src/styles/tokens.css. */
 export const PROJECT_STATES = [
   'production',
   'current-role',

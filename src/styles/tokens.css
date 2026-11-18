@@ -1,5 +1,5 @@
 /*
- * Design tokens from the brand system (BRAND.md §5). Components use these
+ * Design tokens of the brand system. Components use these
  * variables only, never raw hex values, so dark mode can later be a second
  * set of the same variables.
  */

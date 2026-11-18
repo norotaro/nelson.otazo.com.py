@@ -50,10 +50,12 @@ const projects = defineCollection({
 
 /*
  * Teuka customer institutions. Every entry stays `public: false` until the owner
- * agrees with Derlis and the client appears on teuka.app first (BRAND.md §9).
+ * agrees with Derlis and the client appears on teuka.app first.
  */
 const clients = defineCollection({
-  loader: glob({ base: './src/content/clients', pattern: '*.yaml' }),
+  // Empty until the first client is approved; then switch to
+  // glob({ base: './src/content/clients', pattern: '*.yaml' }).
+  loader: async () => [],
   schema: z.object({
     name: z.string(),
     public: z.boolean().default(false),

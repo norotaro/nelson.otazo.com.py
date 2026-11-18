@@ -1,6 +1,6 @@
 // Fails when a text/background token pair drops below WCAG AA (4.5:1).
 // Reads the real values from src/styles/tokens.css, so a color edit is checked
-// against the pairs the brand system promises (BRAND.md §5).
+// against every text/background pair the site uses.
 import { readFileSync } from 'node:fs';
 
 const css = readFileSync(new URL('../src/styles/tokens.css', import.meta.url), 'utf8');
