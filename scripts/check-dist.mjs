@@ -81,25 +81,6 @@ for (const [label, pattern, expected] of expectations) {
   if (found !== expected) errors.push(`index.html: expected ${expected} ${label}, found ${found}`);
 }
 
-// Experience CHANGELOG: one release per job in the home git log, one open-ended
-// current role, and the same start dates as the home page.
-const startDates = (html, pattern) => [...html.matchAll(pattern)].map(([, date]) => date).sort();
-let experience = '';
-try {
-  experience = readFileSync(join(dist, 'experience.html'), 'utf8');
-} catch {
-  errors.push('experience.html: missing');
-}
-if (experience) {
-  const homeDates = startDates(home, /<time class="log__date" datetime="(\d{4}-\d{2})"/g);
-  const releaseDates = startDates(experience, /<time class="release__start" datetime="(\d{4}-\d{2})"/g);
-  if (homeDates.join() !== releaseDates.join()) {
-    errors.push(`experience.html: release dates [${releaseDates}] differ from the home git log [${homeDates}]`);
-  }
-  const current = (experience.match(/→ now\]/g) ?? []).length;
-  if (current !== 1) errors.push(`experience.html: expected 1 "→ now]" release, found ${current}`);
-}
-
 // Blog: the old site's public URLs must keep answering, so every post keeps its
 // slug, the listing keeps 5 posts per page, and /blog still redirects.
 const read = (path) => {
@@ -141,14 +122,37 @@ const rss = read('blog/rss.xml');
 if (rss && (rss.match(/<item>/g) ?? []).length !== slugs.length) errors.push('blog/rss.xml: one <item> per post expected');
 if (!/^\/blog\s+\/blog\/page\/1\s+301$/m.test(read('_redirects'))) errors.push('_redirects: /blog → /blog/page/1 301 missing');
 
-// /open-source lists every open-source and archived project from the data.
-const openSource = read('open-source.html');
-for (const name of readdirSync(new URL('../src/content/projects/', import.meta.url))) {
-  const data = readFileSync(new URL(`../src/content/projects/${name}`, import.meta.url), 'utf8');
-  const project = data.match(/^name: (.+)$/m)?.[1];
-  if (/^state: (open-source|archived)$/m.test(data) && openSource && !openSource.includes(`>${project}<`)) {
-    errors.push(`open-source.html: ${project} missing`);
+// Experience CHANGELOG, in both languages: one release per job, one open-ended
+// current role, and the same start dates as the home git log.
+const startDates = (html, pattern) => [...html.matchAll(pattern)].map(([, date]) => date).sort();
+const homeDates = startDates(home, /<time class="log__date" datetime="(\d{4}-\d{2})"/g);
+for (const [page, now] of [['experience.html', 'now'], ['es/experiencia.html', 'hoy']]) {
+  const html = read(page);
+  if (!html) continue;
+  const releaseDates = startDates(html, /<time class="release__start" datetime="(\d{4}-\d{2})"/g);
+  if (homeDates.join() !== releaseDates.join()) {
+    errors.push(`${page}: release dates [${releaseDates}] differ from the home git log [${homeDates}]`);
   }
+  const current = (html.match(new RegExp(`→ ${now}\\]`, 'g')) ?? []).length;
+  if (current !== 1) errors.push(`${page}: expected 1 "→ ${now}]" release, found ${current}`);
+}
+
+// The open-source pages list every open-source and archived project from the data.
+for (const page of ['open-source.html', 'es/codigo-abierto.html']) {
+  const html = read(page);
+  for (const name of readdirSync(new URL('../src/content/projects/', import.meta.url))) {
+    const data = readFileSync(new URL(`../src/content/projects/${name}`, import.meta.url), 'utf8');
+    const project = data.match(/^name: (.+)$/m)?.[1];
+    if (/^state: (open-source|archived)$/m.test(data) && html && !html.includes(`>${project}<`)) {
+      errors.push(`${page}: ${project} missing`);
+    }
+  }
+}
+
+// Translated pages point at each other, so the language switch always has a target.
+for (const [en, es] of [['experience.html', 'es/experiencia.html'], ['open-source.html', 'es/codigo-abierto.html']]) {
+  const esPath = `/${es.replace(/\.html$/, '')}`;
+  if (!read(en).includes(`hreflang="es" href="${SITE}${esPath}"`)) errors.push(`${en}: no hreflang link to ${esPath}`);
 }
 
 // Teuka pages are separate messages for separate audiences, never alternates.

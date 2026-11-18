@@ -20,7 +20,9 @@ const experience = defineCollection({
       /** Client company for embedded engagements; omit for direct employment. */
       client: z.string().optional(),
       role: z.string(),
+      roleEs: z.string(),
       location: z.string(),
+      locationEs: z.string().optional(),
       start: yearMonth,
       /** Omit for the current role. */
       end: yearMonth.optional(),
@@ -30,10 +32,16 @@ const experience = defineCollection({
       summaryEs: z.string(),
       added: z.array(z.string()).default([]),
       changed: z.array(z.string()).default([]),
+      /** Spanish versions of `added` and `changed`, item by item. */
+      addedEs: z.array(z.string()).default([]),
+      changedEs: z.array(z.string()).default([]),
       stack: z.array(z.string()).default([]),
     })
     .refine((job) => !job.end || job.end >= job.start, {
       message: '`end` must not be before `start`',
+    })
+    .refine((job) => job.addedEs.length === job.added.length && job.changedEs.length === job.changed.length, {
+      message: '`addedEs`/`changedEs` must translate `added`/`changed` item by item',
     }),
 });
 

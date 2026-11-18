@@ -32,7 +32,7 @@ export const ui = {
       'Más de 15 años creando productos web. Vivo en Asunción, Paraguay, y trabajo de forma remota con equipos de Estados Unidos.',
     'work.label': '// trabajo destacado',
     'work.moreArchived': 'plugins de WinterCMS',
-    'career.more': 'changelog completo (en inglés) →',
+    'career.more': 'changelog completo →',
     'blog.more': 'todos los artículos →',
   },
 } as const satisfies Record<Locale, Record<string, string>>;
@@ -55,6 +55,8 @@ export const NAV: Record<Locale, NavItem[]> = {
   ],
   es: [
     { href: '/es/teuka', label: '/teuka' },
+    { href: '/es/experiencia', label: '/experiencia' },
+    { href: '/es/codigo-abierto', label: '/codigo-abierto' },
     { href: '/blog/page/1', label: '/blog' },
   ],
 };

@@ -1,0 +1,88 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../i18n/ui';
+import { getProjects } from '../lib/projects';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const { openSource, archived } = await getProjects();
+const es = lang === 'es';
+---
+
+<BaseLayout
+  title={es ? 'Código abierto · Nelson Otazo' : 'Open source · Nelson Otazo'}
+  description={es
+    ? 'Paquetes de Laravel de código abierto de Nelson Otazo, y los plugins de WinterCMS que ya no mantiene.'
+    : 'Open-source Laravel packages by Nelson Otazo, plus the WinterCMS plugins he no longer maintains.'}
+  lang={lang}
+>
+  <section class="oss">
+    <header class="oss__head">
+      <h1 class="mono">{es ? '/codigo-abierto' : '/open-source'}</h1>
+      {
+        es ? (
+          <p>
+            Código que publico en <a href="https://github.com/norotaro">GitHub</a>. Teuka es de código cerrado; su caso
+            de estudio técnico está en <a href="/projects/teuka" hreflang="en">/projects/teuka</a> (en inglés).
+          </p>
+        ) : (
+          <p>
+            Code I publish on <a href="https://github.com/norotaro">GitHub</a>. Teuka is closed source; its case study is
+            at <a href="/projects/teuka">/projects/teuka</a>.
+          </p>
+        )
+      }
+    </header>
+
+    <section aria-labelledby="packages-title">
+      <h2 id="packages-title" class="section-label">{es ? '// paquetes de laravel' : '// laravel packages'}</h2>
+      <div class="cards">
+        {openSource.map((project) => <ProjectCard project={project} lang={lang} />)}
+      </div>
+    </section>
+
+    <section id="archived" class="oss__archived" aria-labelledby="archived-title">
+      <h2 id="archived-title" class="section-label">
+        {es ? '// plugins de wintercms · sin mantenimiento' : '// wintercms plugins · no longer maintained'}
+      </h2>
+      <div class="cards">
+        {archived.map((project) => <ProjectCard project={project} lang={lang} />)}
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .oss {
+    padding-block: var(--space-7);
+  }
+
+  .oss__head {
+    margin-bottom: var(--space-6);
+    max-width: 44rem;
+  }
+
+  .oss__head h1 {
+    margin-bottom: var(--space-3);
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+  }
+
+  .oss__head p {
+    color: var(--color-ink-muted);
+  }
+
+  .oss__archived {
+    margin-top: var(--space-7);
+    scroll-margin-top: var(--space-5);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
+    gap: var(--space-4);
+  }
+</style>

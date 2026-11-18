@@ -13,7 +13,7 @@ const jobs = await getJobs();
 <section class="career" aria-labelledby="career-title">
   <div class="career__head">
     <h2 id="career-title" class="section-label">// git log --oneline career</h2>
-    <a class="mono career__more" href="/experience" hreflang={lang === 'es' ? 'en' : undefined}>
+    <a class="mono career__more" href={lang === 'es' ? '/es/experiencia' : '/experience'}>
       {t(lang, 'career.more')}
     </a>
   </div>

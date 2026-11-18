@@ -1,6 +1,7 @@
 name: undp-unicef
 employer: UNDP / UNICEF
 role: Junior Web Developer
+roleEs: "Desarrollador web junior"
 location: Asunción
 start: 2009-04
 end: 2012-07
@@ -8,3 +9,5 @@ summary: Junior web developer
 summaryEs: "Desarrollador web junior"
 added:
   - Data-management web application.
+addedEs:
+  - "Aplicación web de gestión de datos."

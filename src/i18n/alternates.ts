@@ -6,7 +6,11 @@ import type { Locale } from './ui';
  * different messages for different audiences and must never be linked as
  * alternates. Spanish blog posts live at unprefixed `/blog/...` and have no pair.
  */
-const PAIRS: ReadonlyArray<Record<Locale, string>> = [{ en: '/', es: '/es' }];
+const PAIRS: ReadonlyArray<Record<Locale, string>> = [
+  { en: '/', es: '/es' },
+  { en: '/experience', es: '/es/experiencia' },
+  { en: '/open-source', es: '/es/codigo-abierto' },
+];
 
 export type Alternate = { locale: Locale; path: string };
 

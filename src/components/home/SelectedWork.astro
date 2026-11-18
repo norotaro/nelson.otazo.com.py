@@ -36,7 +36,7 @@ const moreArchived = archived.length - shownArchived.length;
           <a href={project.url}>{project.name}</a>
         ))}
         {moreArchived > 0 && (
-          <a href="/open-source#archived" hreflang={lang === 'es' ? 'en' : undefined}>
+          <a href={lang === 'es' ? '/es/codigo-abierto#archived' : '/open-source#archived'}>
             +{moreArchived} {t(lang, 'work.moreArchived')}
           </a>
         )}

@@ -2,7 +2,9 @@ name: curotec → inside-real-estate
 employer: Curotec
 client: Inside Real Estate
 role: Senior Engineer (Full-Stack)
+roleEs: "Senior Engineer (Full-Stack)"
 location: Remote
+locationEs: Remoto
 start: 2023-08
 end: 2024-06
 summary: UI component library
@@ -10,3 +12,6 @@ summaryEs: "Biblioteca de componentes de UI"
 added:
   - Reusable UI component library, adopted as the organization's standard frontend toolkit.
   - Led internal PHP learning sessions for the engineering team.
+addedEs:
+  - "Biblioteca de componentes de UI reutilizables, adoptada como el kit de frontend estándar de la organización."
+  - "Dirigí sesiones internas de aprendizaje de PHP para el equipo de ingeniería."

@@ -2,7 +2,9 @@ name: applaudo → decisionlink
 employer: Applaudo Studios
 client: DecisionLink
 role: PHP/Laravel Developer
+roleEs: "Desarrollador PHP/Laravel"
 location: Remote
+locationEs: Remoto
 start: 2021-07
 end: 2023-06
 summary: Report generator redesign · Laravel trainer
@@ -10,3 +12,6 @@ summaryEs: "Rediseño del generador de reportes · instructor de Laravel"
 added:
   - Designed the architecture for a refactored report generator.
   - Laravel mentor and trainer in the company's trainee program.
+addedEs:
+  - "Diseñé la arquitectura de un generador de reportes refactorizado."
+  - "Mentor e instructor de Laravel en el programa de trainees de la empresa."

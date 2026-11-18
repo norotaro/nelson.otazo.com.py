@@ -2,7 +2,9 @@ name: curotec → carefeed
 employer: Curotec
 client: Carefeed
 role: Senior Engineer (Full-Stack)
+roleEs: "Senior Engineer (Full-Stack)"
 location: Remote
+locationEs: Remoto
 start: 2024-07
 summary: Senior Engineer (Full-Stack)
 summaryEs: "Senior Engineer (Full-Stack)"
@@ -13,3 +15,9 @@ added:
 changed:
   - "Payments: worked on the legacy product, then helped build the new payments service from its first release, including the migration of legacy data."
 stack: [laravel, php, vue-3, typescript, inertia, mysql, redis, aws]
+addedEs:
+  - "Análisis con LLM de documentos de derivación hospitalaria para los equipos de admisión."
+  - "Lideré una integración con EHR desde el spike de exploración hasta producción, con sincronización nocturna y por eventos en tiempo real."
+  - "Lideré la búsqueda universal (Cmd-K) desde un prototipo de hackathon hasta producción."
+changedEs:
+  - "Pagos: trabajé en el producto anterior y luego ayudé a construir el nuevo servicio de pagos desde su primera versión, incluida la migración de los datos existentes."
