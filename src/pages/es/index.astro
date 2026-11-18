@@ -1,5 +1,11 @@
 ---
+import LatestPosts from '../../components/home/LatestPosts.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const links = [
+  { href: 'https://www.linkedin.com/in/nelson-otazo/', label: 'linkedin' },
+  { href: 'https://github.com/norotaro', label: 'github' },
+];
 ---
 
 <BaseLayout
@@ -8,23 +14,100 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   lang="es"
 >
   <section class="es-home">
-    <h1>Nelson Otazo</h1>
-    <p>Desarrollo software desde 2009. Hoy construyo y mantengo Teuka junto a Derlis Gómez.</p>
+    <h1 class="mono">Nelson Otazo</h1>
+    <p class="es-home__headline mono">Ingeniero de software full-stack · Laravel · Vue</p>
+    <p class="es-home__lead">Desarrollo software desde 2009. Hoy construyo y mantengo Teuka junto a Derlis Gómez.</p>
+    <p class="es-home__context">
+      Vivo en Asunción y trabajo de forma remota con equipos de Estados Unidos. Mi experiencia profesional está detallada{' '}
+      <a href="/experience" hreflang="en">en inglés</a>.
+    </p>
+    <div class="es-home__actions mono">
+      {links.map((link) => <a class="button" href={link.href}>{link.label}</a>)}
+    </div>
   </section>
+
+  <section class="teuka" aria-labelledby="teuka-title">
+    <h2 id="teuka-title" class="section-label">// teuka</h2>
+    <a class="card teuka__card link-plain" href="/es/teuka">
+      <span class="teuka__name mono">teuka.app</span>
+      <span class="teuka__text">
+        Plataforma para congresos científicos: envío de resúmenes, revisión por pares doble ciego, inscripciones, pagos y
+        certificados.
+      </span>
+      <span class="teuka__more mono">conocer cómo trabajamos →</span>
+    </a>
+  </section>
+
+  <LatestPosts limit={3} />
 </BaseLayout>
 
 <style>
   .es-home {
     padding-block: var(--space-8) var(--space-7);
-    display: grid;
-    gap: var(--space-4);
-    max-width: 45rem;
+    max-width: 48rem;
   }
+
   h1 {
-    font-size: clamp(2rem, 5vw, 2.75rem);
+    margin-bottom: var(--space-2);
+    font-size: clamp(2.25rem, 6vw, 2.75rem);
+    line-height: 1.15;
   }
-  p {
+
+  .es-home__headline {
+    margin-bottom: var(--space-6);
     font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  .es-home__lead {
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .es-home__context {
+    margin-bottom: var(--space-6);
+    max-width: 40rem;
+    font-size: 1.0625rem;
+    color: var(--color-ink-muted);
+  }
+
+  .es-home__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    font-size: 0.875rem;
+  }
+
+  .teuka {
+    margin-bottom: var(--space-7);
+  }
+
+  .teuka__card {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    max-width: 48rem;
+    color: var(--color-ink);
+  }
+
+  .teuka__card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .teuka__name {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .teuka__text {
     color: var(--color-ink-body);
+  }
+
+  .teuka__more {
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    text-decoration: underline;
   }
 </style>

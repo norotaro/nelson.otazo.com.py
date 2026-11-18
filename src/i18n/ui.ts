@@ -33,6 +33,7 @@ export const NAV: Record<Locale, NavItem[]> = {
   en: [
     { href: '/#work', label: '/work' },
     { href: '/experience', label: '/experience' },
+    { href: '/open-source', label: '/open-source' },
     { href: '/blog/page/1', label: '/blog' },
   ],
   es: [{ href: '/blog/page/1', label: '/blog' }],

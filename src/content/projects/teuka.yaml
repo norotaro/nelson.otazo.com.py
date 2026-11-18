@@ -1,6 +1,6 @@
 name: teuka
 state: production
 summary: "Multi-tenant SaaS for scientific conferences: abstract submission, double-blind peer review, registrations, payments and certificates. Built and run solo."
-stack: [laravel-12, filament, octane, pest]
+stack: [laravel-13, filament-5, octane, pest]
 url: https://teuka.app
 order: 1
