@@ -1,0 +1,15 @@
+# Client name withheld until the employment contract allows it (BRAND.md §4 fallback).
+name: healthcare-saas
+employer: Curotec
+client: US healthcare SaaS for senior living
+role: Senior Engineer (Full-Stack)
+location: Remote
+start: 2024-07
+summary: Senior Engineer · via Curotec
+added:
+  - LLM-powered analysis of hospital referral documents for admissions teams.
+  - Led an EHR integration from discovery spike to production, syncing nightly and on real-time events.
+  - Led universal search (Cmd-K) from hackathon prototype to production.
+changed:
+  - "Payments: worked on the legacy product, then helped build the new payments service from its first release, including the migration of legacy data."
+stack: [laravel, php, vue-3, typescript, inertia, mysql, redis, aws]

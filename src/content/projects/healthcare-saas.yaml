@@ -1,0 +1,6 @@
+# Client name withheld until the employment contract allows it (BRAND.md §4 fallback).
+name: healthcare-saas
+state: current-role
+summary: "US healthcare SaaS for senior living, via Curotec: LLM analysis of referral documents, EHR integration, payments platform, universal search."
+stack: [laravel, vue-3, typescript, aws]
+order: 2

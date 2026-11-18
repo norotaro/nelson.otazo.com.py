@@ -1,0 +1,5 @@
+name: wn-firebase-plugin
+state: archived
+summary: "WinterCMS plugin: Firebase setup."
+stack: [php, wintercms]
+url: https://github.com/norotaro/wn-firebase-plugin

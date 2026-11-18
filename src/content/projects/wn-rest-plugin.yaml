@@ -1,0 +1,5 @@
+name: wn-rest-plugin
+state: archived
+summary: "WinterCMS plugin: Utilities for REST endpoints."
+stack: [php, wintercms]
+url: https://github.com/norotaro/wn-rest-plugin

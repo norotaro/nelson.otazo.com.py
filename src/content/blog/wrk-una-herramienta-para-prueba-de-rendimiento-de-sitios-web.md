@@ -13,13 +13,13 @@ Durante la presentación de [Laravel Octane](https://nelson.otazo.com.py/blog/po
 
 Una vez instalado, el uso básico es:
 
-```bach
+```bash
 wrk -t12 -c400 -d30s http://site.test
 ```
 
 Esto ejecuta una prueba de rendimiento durante 30 segundos (-d30s), utilizando 12 subprocesos (-t12) y manteniendo abiertas 400 (-c400) conexiones HTTP. La salida después de ejecutarlo es algo parecido a esto:
 
-```bach
+```bash
 Running 30s test @ http://site.test
   12 threads and 400 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev

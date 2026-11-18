@@ -1,0 +1,5 @@
+name: wn-blogapi-plugin
+state: archived
+summary: "WinterCMS plugin: Endpoints for Winter.Blog data."
+stack: [php, wintercms]
+url: https://github.com/norotaro/wn-blogapi-plugin
