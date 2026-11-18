@@ -15,15 +15,24 @@ interface Props {
   lang: Locale;
   ogImage?: string;
   noindex?: boolean;
+  ogType?: 'website' | 'article';
 }
 
-const { title, description, lang, ogImage, noindex } = Astro.props;
+const { title, description, lang, ogImage, noindex, ogType } = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <Head title={title} description={description} lang={lang} ogImage={ogImage} noindex={noindex} />
+    <Head
+      title={title}
+      description={description}
+      lang={lang}
+      ogImage={ogImage}
+      noindex={noindex}
+      ogType={ogType}
+    />
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">{t(lang, 'skip')}</a>

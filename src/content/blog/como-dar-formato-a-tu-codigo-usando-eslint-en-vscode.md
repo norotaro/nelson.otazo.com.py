@@ -22,7 +22,7 @@ Abre la configuración de VSCode. En Mac puedes hacerlo con el atajo `Cmd+,` o p
 
 Haz click en el pequeño ícono de arriba a la derecha que parece un papel con una pequeña flecha. ![VSCode settings image](/img/blog/como-dar-formato-a-tu-codigo-usando-eslint-en-vscode/vscode-settings.jpg) Agrega estas 4 líneas en el primer nivel de la configuración.
 
-```json{3-6}[settings.json]
+```json
 // settings.json
 {
     // ...

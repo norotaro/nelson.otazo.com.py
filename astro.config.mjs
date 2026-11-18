@@ -17,6 +17,8 @@ export default defineConfig({
   // No sitemap `i18n` option: it pairs alternates by matching paths, and pages here
   // are paired explicitly in src/i18n/alternates.ts (see the hreflang links in Head).
   integrations: [sitemap()],
+  // Light code blocks: the home hero's terminal is the only dark block on the site.
+  markdown: { shikiConfig: { theme: 'github-light' } },
   fonts: [
     {
       name: 'JetBrains Mono',

@@ -91,6 +91,37 @@ if (experience) {
   if (current !== 1) errors.push(`experience.html: expected 1 "→ now]" release, found ${current}`);
 }
 
+// Blog: the old site's public URLs must keep answering, so every post keeps its
+// slug, the listing keeps 5 posts per page, and /blog still redirects.
+const read = (path) => {
+  try {
+    return readFileSync(join(dist, path), 'utf8');
+  } catch {
+    errors.push(`${path}: missing`);
+    return '';
+  }
+};
+const slugs = readdirSync(new URL('../src/content/blog/', import.meta.url))
+  .filter((name) => name.endsWith('.md'))
+  .map((name) => name.replace(/\.md$/, ''));
+for (const slug of slugs) {
+  const post = read(`blog/post/${slug}.html`);
+  if (post && !post.includes('<html lang="es"')) errors.push(`blog/post/${slug}.html: not lang="es"`);
+}
+const listed = [];
+for (let page = 1; page <= Math.ceil(slugs.length / 5); page++) {
+  const html = read(`blog/page/${page}.html`);
+  const links = [...new Set([...html.matchAll(/href="\/blog\/post\/([^"]+)"/g)].map(([, slug]) => slug))];
+  if (html && links.length !== Math.min(5, slugs.length - (page - 1) * 5)) {
+    errors.push(`blog/page/${page}.html: lists ${links.length} posts`);
+  }
+  listed.push(...links);
+}
+if (listed.sort().join() !== [...slugs].sort().join()) errors.push('blog/page/*: listing does not cover every post once');
+const rss = read('blog/rss.xml');
+if (rss && (rss.match(/<item>/g) ?? []).length !== slugs.length) errors.push('blog/rss.xml: one <item> per post expected');
+if (!/^\/blog\s+\/blog\/page\/1\s+301$/m.test(read('_redirects'))) errors.push('_redirects: /blog → /blog/page/1 301 missing');
+
 // The availability line belongs to English pages only.
 for (const file of files) {
   const html = readFileSync(file, 'utf8');

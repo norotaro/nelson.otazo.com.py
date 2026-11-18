@@ -239,6 +239,3 @@ Como era de esperar, se han añadido algunas clases de reflexión para tratar co
 
 Al igual que las clases y propiedades normales, las enumeraciones y sus casos pueden anotarse utilizando atributos. Ten en cuenta que el filtro `TARGET_CLASS` también incluirá los enums.
 
-<div class="bg-yellow-100 mb-6 p-4 rounded-lg">
-    ¿Has detectado un error? Puedes <a href="https://github.com/norotaro/nelson.otazo.com.py">enviar un PR</a> para solucionarlo.
-</div>

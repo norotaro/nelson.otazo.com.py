@@ -12,9 +12,10 @@ interface Props {
   ogImage?: string;
   /** Keep the page out of search results (404). */
   noindex?: boolean;
+  ogType?: 'website' | 'article';
 }
 
-const { title, description, lang, ogImage = '/og.png', noindex = false } = Astro.props;
+const { title, description, lang, ogImage = '/og.png', noindex = false, ogType = 'website' } = Astro.props;
 const site = Astro.site!;
 const canonical = new URL(pagePath(Astro.url), site).href;
 const alternates = alternatesFor(pagePath(Astro.url));
@@ -46,7 +47,7 @@ const ogLocale = lang === 'es' ? 'es_PY' : 'en_US';
 <!-- Search Console ownership, carried over from the previous site. -->
 <meta name="google-site-verification" content="ELfyPA2bVB6il83xoP8GzAaNZOodIiUnP0AfcsXVZaQ" />
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:site_name" content="Nelson Otazo" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

@@ -24,7 +24,7 @@ Este paquete es flexible, ya que puede usarlo de la forma recomendada o un forma
 
 A continuación se muestra un ejemplo con el punto #1 anterior, que es un modelo `Post` que tiene dos campos de texto enriquecidos:
 
-```php{9-11}[Post.php]
+```php
 use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
  
 class Post extends Model
