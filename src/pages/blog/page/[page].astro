@@ -1,0 +1,150 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getPosts, isoDate, postUrl, POSTS_PER_PAGE, type Post } from '../../../lib/blog';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPosts();
+  const pages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  return Array.from({ length: pages }, (_, index) => ({
+    params: { page: String(index + 1) },
+    props: {
+      posts: posts.slice(index * POSTS_PER_PAGE, (index + 1) * POSTS_PER_PAGE),
+      page: index + 1,
+      pages,
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  posts: Post[];
+  page: number;
+  pages: number;
+}
+
+const { posts, page, pages } = Astro.props;
+const pageUrl = (n: number) => `/blog/page/${n}`;
+---
+
+<BaseLayout
+  title={page === 1 ? 'Blog · Nelson Otazo' : `Blog, página ${page} · Nelson Otazo`}
+  description="Artículos sobre desarrollo web, Laravel y PHP, escritos en español por Nelson Otazo."
+  lang="es"
+>
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Nelson Otazo · Blog" href="/blog/rss.xml" />
+
+  <section class="blog">
+    <header class="blog__head">
+      <h1 class="mono">/blog</h1>
+      <p>Escribo sobre desarrollo web, Laravel y PHP. <a href="/blog/rss.xml">RSS</a></p>
+    </header>
+
+    <ol class="card entries" role="list">
+      {
+        posts.map((post) => (
+          <li class="entry">
+            <p class="entry__meta mono">
+              <time datetime={isoDate(post.data.date)}>{isoDate(post.data.date)}</time>
+              {post.data.category && <span> · {post.data.category}</span>}
+            </p>
+            <h2 class="entry__title">
+              <a class="link-plain" href={postUrl(post)}>
+                {post.data.title}
+              </a>
+            </h2>
+            <p class="entry__description">{post.data.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    {
+      pages > 1 && (
+        <nav class="pager mono" aria-label="Páginas del blog">
+          {page > 1 ? <a href={pageUrl(page - 1)}>← más recientes</a> : <span />}
+          <span class="pager__count">
+            página {page} de {pages}
+          </span>
+          {page < pages ? <a href={pageUrl(page + 1)}>anteriores →</a> : <span />}
+        </nav>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .blog {
+    padding-block: var(--space-7);
+    max-width: 50rem;
+  }
+
+  .blog__head {
+    margin-bottom: var(--space-6);
+  }
+
+  .blog__head h1 {
+    margin-bottom: var(--space-3);
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+  }
+
+  .blog__head p {
+    color: var(--color-ink-muted);
+  }
+
+  .entries {
+    margin: 0;
+    padding: 0 var(--space-5);
+    list-style: none;
+  }
+
+  .entry {
+    padding-block: var(--space-5);
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  .entry:last-child {
+    border-bottom: 0;
+  }
+
+  .entry__meta {
+    margin-bottom: var(--space-2);
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+  }
+
+  .entry__title {
+    margin-bottom: var(--space-2);
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .entry__title a:hover {
+    color: var(--color-accent-dark);
+    text-decoration: underline;
+  }
+
+  .entry__description {
+    color: var(--color-ink-body);
+  }
+
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+    font-size: 0.875rem;
+  }
+
+  .pager__count {
+    color: var(--color-ink-muted);
+  }
+
+  @media (max-width: 47.99rem) {
+    .entries {
+      padding: 0 var(--space-4);
+    }
+  }
+</style>

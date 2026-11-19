@@ -1,0 +1,90 @@
+---
+import { t, type Locale } from '../../i18n/ui';
+import { getPosts, isoDate, postUrl } from '../../lib/blog';
+
+interface Props {
+  lang: Locale;
+  limit?: number;
+}
+
+const { lang, limit = 2 } = Astro.props;
+const posts = (await getPosts()).slice(0, limit);
+---
+
+<section class="posts" aria-labelledby="posts-title">
+  <div class="posts__head">
+    <h2 id="posts-title" class="section-label">
+      {lang === 'es' ? '// blog' : <>// blog · <span lang="es">escribo en español</span></>}
+    </h2>
+    <a class="mono posts__more" href="/blog/page/1" hreflang={lang === 'en' ? 'es' : undefined}>{t(lang, 'blog.more')}</a>
+  </div>
+  <ul class="card post-list" role="list">
+    {
+      posts.map((post) => (
+        <li>
+          <a class="post link-plain" href={postUrl(post)} hreflang="es">
+            <time class="post__date mono" datetime={isoDate(post.data.date)}>
+              {isoDate(post.data.date)}
+            </time>
+            <span class="post__title" lang="es">{post.data.title}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .posts {
+    margin-top: var(--space-7);
+  }
+
+  .posts__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .posts__head .section-label {
+    margin-bottom: 0;
+  }
+
+  .posts__more {
+    font-size: 0.875rem;
+  }
+
+  .post-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .post-list li + li {
+    border-top: 1px solid var(--color-divider);
+  }
+
+  .post {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    color: var(--color-ink);
+  }
+
+  .post:hover .post__title {
+    color: var(--color-accent-dark);
+    text-decoration: underline;
+  }
+
+  .post__date {
+    font-size: 0.9375rem;
+    color: var(--color-ink-muted);
+  }
+
+  .post__title {
+    font-size: 1rem;
+  }
+</style>

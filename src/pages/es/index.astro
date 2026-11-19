@@ -1,0 +1,84 @@
+---
+import { getEntry } from 'astro:content';
+import StateChip from '../../components/StateChip.astro';
+import CareerLog from '../../components/home/CareerLog.astro';
+import Hero from '../../components/home/Hero.astro';
+import LatestPosts from '../../components/home/LatestPosts.astro';
+import SelectedWork from '../../components/home/SelectedWork.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const teuka = (await getEntry('projects', 'teuka'))!.data;
+---
+
+<BaseLayout
+  title="Nelson Otazo · Ingeniero full-stack senior"
+  description="Ingeniero full-stack senior (Laravel, Vue). Construyo y me hago cargo de software en producción de punta a punta. Creador de Teuka, plataforma para congresos científicos."
+  lang="es"
+>
+  <Hero lang="es" />
+
+  <!-- Spanish readers include Teuka prospects, so Teuka leads before the rest of the work. -->
+  <section class="teuka" aria-labelledby="teuka-title">
+    <h2 id="teuka-title" class="section-label">// teuka</h2>
+    <article class="card teuka__card">
+      <div class="teuka__head">
+        <p class="teuka__name mono"><a class="link-plain" href={teuka.url}>teuka.app</a></p>
+        <StateChip state={teuka.state} />
+      </div>
+      <p class="teuka__text">{teuka.summaryEs}</p>
+      <p class="teuka__actions mono">
+        <a href="/es/teuka">quiénes estamos detrás de Teuka →</a>
+        <a href="/es/proyectos/teuka">caso de estudio técnico →</a>
+      </p>
+    </article>
+  </section>
+
+  <SelectedWork lang="es" exclude={['teuka']} />
+  <CareerLog lang="es" />
+  <LatestPosts lang="es" limit={3} />
+</BaseLayout>
+
+<style>
+  .teuka {
+    margin-bottom: var(--space-7);
+  }
+
+  .teuka__card {
+    padding: var(--space-6);
+    border-color: var(--color-accent);
+    border-left-width: 4px;
+  }
+
+  .teuka__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .teuka__name {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .teuka__name a {
+    color: var(--color-ink);
+  }
+
+  .teuka__text {
+    margin-bottom: var(--space-5);
+    max-width: 42rem;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--color-ink-body);
+  }
+
+  .teuka__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    font-size: 0.875rem;
+  }
+</style>

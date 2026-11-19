@@ -1,0 +1,58 @@
+---
+import { alternatesFor } from '../i18n/alternates';
+import { pagePath } from '../lib/page-path';
+import { t, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const other = alternatesFor(pagePath(Astro.url)).find((alt) => alt.locale !== lang);
+const repo = 'https://github.com/norotaro/nelson.otazo.com.py';
+---
+
+<footer class="footer container">
+  <p>{t(lang, 'footer.offTheClock')}</p>
+  <p class="footer__meta">
+    {
+      other && (
+        <a href={other.path} hreflang={other.locale} lang={other.locale}>
+          {t(lang, 'lang.switch')}
+        </a>
+      )
+    }
+    <span>
+      ~/norotaro · Asunción, PY · <a href={repo}>{t(lang, 'footer.source')}</a>
+    </span>
+  </p>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-5);
+    margin-top: var(--space-7);
+    padding-block: var(--space-5) var(--space-8);
+    border-top: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+  }
+
+  .footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+  }
+
+  .footer a {
+    color: var(--color-ink-muted);
+  }
+
+  .footer a:hover {
+    color: var(--color-ink);
+  }
+</style>

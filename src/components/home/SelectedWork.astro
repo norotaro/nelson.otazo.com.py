@@ -1,0 +1,74 @@
+---
+import ProjectCard from '../ProjectCard.astro';
+import StateChip from '../StateChip.astro';
+import { t, type Locale } from '../../i18n/ui';
+import { getProjects } from '../../lib/projects';
+
+interface Props {
+  lang: Locale;
+  /** Project ids shown elsewhere on the page. */
+  exclude?: string[];
+}
+
+const { lang, exclude = [] } = Astro.props;
+const { archived, ...projects } = await getProjects();
+const featured = projects.featured.filter((project) => !exclude.includes(project.id));
+const shownArchived = archived.slice(0, 3);
+const moreArchived = archived.length - shownArchived.length;
+---
+
+<section id="work" aria-labelledby="work-title">
+  <h2 id="work-title" class="section-label">{t(lang, 'work.label')}</h2>
+
+  <div class="cards">
+    {
+      featured.map((project) => (
+        <ProjectCard project={project} lang={lang} />
+      ))
+    }
+  </div>
+
+  {
+    archived.length > 0 && (
+      <div class="card archived mono">
+        <StateChip state="archived" />
+        {shownArchived.map((project) => (
+          <a href={project.url}>{project.name}</a>
+        ))}
+        {moreArchived > 0 && (
+          <a href={lang === 'es' ? '/es/codigo-abierto#archived' : '/open-source#archived'}>
+            +{moreArchived} {t(lang, 'work.moreArchived')}
+          </a>
+        )}
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-4);
+  }
+
+  /* With an odd number of cards, the last one takes the whole row instead of
+     leaving an empty cell next to it. */
+  .cards > :global(:last-child:nth-child(odd)) {
+    grid-column: 1 / -1;
+  }
+
+  .archived {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) 1.25rem;
+    margin-top: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    font-size: 0.8125rem;
+  }
+
+  .archived a {
+    color: var(--color-ink-body);
+  }
+</style>

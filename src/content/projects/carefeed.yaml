@@ -1,0 +1,6 @@
+name: carefeed
+state: current-role
+summary: "Healthcare SaaS for senior living, via Curotec: LLM analysis of referral documents, EHR integration, payments platform, universal search."
+summaryEs: "SaaS de salud para residencias de adultos mayores, vía Curotec: análisis con LLM de documentos de derivación, integración con EHR, plataforma de pagos y búsqueda universal."
+stack: [laravel, vue-3, typescript, aws]
+order: 2

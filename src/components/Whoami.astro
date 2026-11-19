@@ -1,0 +1,36 @@
+---
+interface Props {
+  /** The answer line, in the page's language. */
+  answer: string;
+}
+
+const { answer } = Astro.props;
+---
+
+<!-- The site's only terminal block: home pages only (EN and ES). Anywhere else it turns into a gimmick. -->
+<div class="terminal mono" role="group" aria-label="whoami">
+  <span><span class="terminal__host">nelson@asuncion</span><span class="terminal__prompt">:~$</span> whoami</span>
+  <span>{answer}</span>
+</div>
+
+<style>
+  .terminal {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin-bottom: var(--space-6);
+    padding: 0.875rem 1.125rem;
+    background: var(--color-ink);
+    color: var(--color-terminal-text);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+  }
+
+  .terminal__host {
+    color: var(--color-accent-light);
+  }
+
+  .terminal__prompt {
+    color: var(--color-terminal-prompt);
+  }
+</style>

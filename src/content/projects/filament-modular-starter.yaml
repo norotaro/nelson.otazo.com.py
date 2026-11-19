@@ -1,0 +1,7 @@
+name: filament-modular-starter
+state: open-source
+summary: "Laravel 13 and Filament 5 starter kit extracted from Teuka: a runtime module system, one Filament panel per audience, and a payment gateway layer. Installs with the Laravel installer."
+summaryEs: "Kit de inicio de Laravel 13 y Filament 5 extraído de Teuka: un sistema de módulos en tiempo de ejecución, un panel de Filament por cada tipo de usuario y una capa de pasarelas de pago. Se instala con el instalador de Laravel."
+stack: [laravel-13, filament-5, pest]
+order: 3
+url: https://github.com/norotaro/filament-modular-starter

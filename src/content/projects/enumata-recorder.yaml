@@ -1,0 +1,6 @@
+name: enumata-recorder
+state: open-source
+summary: Companion package for Enumata that records every state transition, so a model's history can be queried.
+summaryEs: "Paquete complementario de Enumata que registra cada transición de estado para poder consultar el historial de un modelo."
+stack: [php, laravel-package]
+url: https://github.com/norotaro/enumata-recorder

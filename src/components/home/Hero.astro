@@ -1,0 +1,71 @@
+---
+import Whoami from '../Whoami.astro';
+import { t, type Locale } from '../../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+
+const links = [
+  { href: 'https://www.linkedin.com/in/nelson-otazo/', label: 'linkedin' },
+  { href: 'https://github.com/norotaro', label: 'github' },
+];
+---
+
+<header class="hero">
+  <Whoami answer={t(lang, 'home.whoami')} />
+
+  <h1 class="hero__name">Nelson Otazo</h1>
+  <p class="hero__headline mono">{t(lang, 'home.headline')}</p>
+  <p class="hero__positioning">{t(lang, 'home.positioning')}</p>
+  <p class="hero__context">{t(lang, 'home.context')}</p>
+
+  <div class="hero__actions mono">
+    {links.map((link) => <a class="button" href={link.href}>{link.label}</a>)}
+  </div>
+</header>
+
+<style>
+  .hero {
+    padding-block: var(--space-8) var(--space-7);
+    max-width: 54rem;
+  }
+
+  .hero__name {
+    margin-bottom: var(--space-2);
+    font-size: clamp(2.25rem, 6vw, 2.75rem);
+    line-height: 1.15;
+  }
+
+  .hero__headline {
+    margin-bottom: var(--space-6);
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  .hero__positioning {
+    margin-bottom: 1.25rem;
+    max-width: 48rem;
+    font-size: clamp(1.375rem, 3.2vw, 1.625rem);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .hero__context {
+    margin-bottom: var(--space-6);
+    max-width: 40rem;
+    font-size: 1.0625rem;
+    color: var(--color-ink-muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+    font-size: 0.875rem;
+  }
+
+</style>

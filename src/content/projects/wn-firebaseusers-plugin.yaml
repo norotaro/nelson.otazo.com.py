@@ -1,0 +1,6 @@
+name: wn-firebaseusers-plugin
+state: archived
+summary: "WinterCMS plugin: Sync users between Firebase and Winter.Users."
+summaryEs: "Plugin de WinterCMS: sincroniza usuarios entre Firebase y Winter.Users."
+stack: [php, wintercms]
+url: https://github.com/norotaro/wn-firebaseusers-plugin

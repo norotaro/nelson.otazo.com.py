@@ -1,22 +1,25 @@
 {
+  "name": "nelson-otazo-com-py",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "og": "sh scripts/render-og.sh",
+    "verify": "node scripts/check-contrast.mjs && astro check && astro build && node scripts/check-dist.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "7.4.7"
   },
   "devDependencies": {
-    "@heroicons/vue": "^2.0.12",
-    "@nuxt/content": "^2.2.1",
-    "@nuxtjs/tailwindcss": "^6.3.1",
-    "@tailwindcss/typography": "^0.5.7",
-    "nuxt": "^3.2.0",
-    "nuxt-simple-robots": "^3.0.2",
-    "nuxt-simple-sitemap": "^3.0.11"
-  },
-  "packageManager": "yarn@3.6.1",
-  "dependencies": {
-    "vue-gtag-next": "^1.14.0"
+    "@astrojs/check": "0.9.12",
+    "typescript": "6.0.3"
   }
 }

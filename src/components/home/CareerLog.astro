@@ -1,0 +1,145 @@
+---
+import { t, type Locale } from '../../i18n/ui';
+import { getJobs } from '../../lib/career';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const jobs = await getJobs();
+---
+
+<section class="career" aria-labelledby="career-title">
+  <div class="career__head">
+    <h2 id="career-title" class="section-label">// git log --oneline career</h2>
+    <a class="mono career__more" href={lang === 'es' ? '/es/experiencia' : '/experience'}>
+      {t(lang, 'career.more')}
+    </a>
+  </div>
+
+  <ol class="card log mono" role="list">
+    {
+      jobs.map((job) => (
+        <li class="log__row">
+          <span class="log__graph" aria-hidden="true">*</span>
+          <span class="log__hash">{job.hash}</span>
+          <time class="log__date" datetime={job.start}>{job.start}</time>
+          <span class="log__name">{job.name}</span>
+          <span class="log__msg">
+            {job.ref === 'current' && <span class="log__ref">(HEAD → current) </span>}
+            {job.ref === 'initial' && <span class="log__tag">(tag: v0.1) </span>}
+            {lang === 'es' ? job.summaryEs : job.summary}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .career {
+    margin-top: var(--space-7);
+  }
+
+  .career__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .career__head .section-label {
+    margin-bottom: 0;
+  }
+
+  .career__more {
+    font-size: 0.875rem;
+  }
+
+  .log {
+    margin: 0;
+    padding: 1.25rem var(--space-5);
+    list-style: none;
+    font-size: 0.875rem;
+  }
+
+  .log__graph,
+  .log__ref {
+    color: var(--color-accent);
+  }
+
+  .log__hash {
+    color: var(--color-hash);
+  }
+
+  .log__date,
+  .log__tag {
+    color: var(--color-ink-muted);
+  }
+
+  .log__name {
+    font-weight: 700;
+  }
+
+  /* Desktop: one aligned line per commit, like the terminal output. */
+  @media (min-width: 48rem) {
+    .log {
+      display: grid;
+      grid-template-columns: 1.5rem auto auto auto 1fr;
+      column-gap: var(--space-3);
+      line-height: 2;
+    }
+
+    .log__row {
+      display: contents;
+    }
+  }
+
+  /* Phones: stack instead of scrolling sideways. */
+  @media (max-width: 47.99rem) {
+    .log {
+      padding-block: var(--space-1);
+      padding-inline: var(--space-4);
+    }
+
+    .log__row {
+      display: grid;
+      grid-template-columns: auto auto auto 1fr;
+      column-gap: 0.625rem;
+      row-gap: 0.1875rem;
+      padding-block: var(--space-3);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .log__row:last-child {
+      border-bottom: 0;
+    }
+
+    .log__graph {
+      grid-row: span 3;
+    }
+
+    .log__hash,
+    .log__date {
+      font-size: 0.75rem;
+    }
+
+    .log__date {
+      grid-column: 3 / -1;
+    }
+
+    .log__name {
+      grid-column: 2 / -1;
+      font-size: 0.9375rem;
+    }
+
+    .log__msg {
+      grid-column: 2 / -1;
+      font-family: var(--font-sans);
+      color: var(--color-ink-body);
+    }
+  }
+</style>

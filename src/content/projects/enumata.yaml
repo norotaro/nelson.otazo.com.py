@@ -1,0 +1,7 @@
+name: enumata
+state: open-source
+summary: State machines for Laravel Eloquent models, built on native PHP enums.
+summaryEs: "Máquinas de estado para modelos Eloquent de Laravel, basadas en enums nativos de PHP."
+stack: [php, laravel-package]
+url: https://github.com/norotaro/enumata
+order: 4

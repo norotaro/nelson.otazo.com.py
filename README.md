@@ -1,42 +1,26 @@
 # nelson.otazo.com.py
 
-This is a Nuxt site
+Personal site of Nelson Otazo. Static site built with [Astro](https://astro.build) and plain CSS, deployed to Netlify.
 
-## Setup
+## Develop
 
-Make sure to install the dependencies:
+Requires the Node version in `.nvmrc`.
 
-```bash
-# yarn
-yarn install
-
-# npm
+```sh
 npm install
-
-# pnpm
-pnpm install --shamefully-hoist
+npm run dev      # local server
+npm run verify   # type check, build and output checks
 ```
 
-## Development Server
+## Layout
 
-Start the development server on http://localhost:3000
+- `src/content/` content collections: experience, projects, blog posts (Spanish).
+- `src/styles/` design tokens and global CSS.
+- `src/i18n/` locale strings and the explicit map of translated page pairs.
+- `src/pages/` one file per route; blog posts keep the old URLs (`/blog/post/<slug>`, `/blog/page/N`).
+- `src/assets/blog/` post covers that Astro resizes. The same files stay in `public/img/blog/` because old links point there; update both when a cover changes.
+- `scripts/check-dist.mjs` checks the built site: old URLs, copy rules, page structure and image sizing. It runs as part of `npm run verify`.
 
-```bash
-npm run dev
-```
+## Writing a post
 
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment) for more information.
+Add `src/content/blog/<slug>.md` with `title`, `description`, `date`, and optionally `img`, `category` and `tags`. The slug becomes the URL, so never rename a published one. A cover named in `img` goes in both `src/assets/blog/` and `public/img/blog/`.
