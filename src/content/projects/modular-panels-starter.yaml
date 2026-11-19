@@ -1,6 +1,0 @@
-name: modular-panels-starter
-state: open-source
-summary: Laravel 13 and Filament 5 skeleton extracted from Teuka, with a runtime module system, multiple Filament panels and a payment gateway layer. No domain logic and no tenancy.
-summaryEs: "Esqueleto de Laravel 13 y Filament 5 extraído de Teuka, con un sistema de módulos en tiempo de ejecución, varios paneles de Filament y una capa de pasarelas de pago. Sin lógica de dominio ni multi-tenancy."
-stack: [laravel-13, filament-5, pest]
-url: https://github.com/norotaro/modular-panels-starter
