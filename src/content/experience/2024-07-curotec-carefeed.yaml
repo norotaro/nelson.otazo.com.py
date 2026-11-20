@@ -1,13 +1,13 @@
 name: curotec → carefeed
 employer: Curotec
 client: Carefeed
-role: Senior Engineer (Full-Stack)
-roleEs: "Senior Engineer (Full-Stack)"
+role: Senior Software Engineer
+roleEs: "Senior Software Engineer"
 location: Remote
 locationEs: Remoto
 start: 2024-07
-summary: Senior Engineer (Full-Stack)
-summaryEs: "Senior Engineer (Full-Stack)"
+summary: Senior Software Engineer
+summaryEs: "Senior Software Engineer"
 added:
   - LLM-powered analysis of hospital referral documents for admissions teams.
   - Led an EHR integration from discovery spike to production, syncing nightly and on real-time events.
@@ -21,3 +21,15 @@ addedEs:
   - "Lideré la búsqueda universal (Cmd-K) desde un prototipo de hackathon hasta producción."
 changedEs:
   - "Pagos: trabajé en el producto anterior y luego ayudé a construir el nuevo servicio de pagos desde su primera versión, incluida la migración de los datos existentes."
+cvExtra:
+  - Structured the payments code as a hybrid of layered design and vertical slices for scalability and maintainability.
+  - Built an extensive Pest test suite, raising code coverage and reliability.
+# Of the hackathon work only universal search is in production: never call
+# Admissions Desk or the Octane image shipped or deployed, and quote no speed
+# figures (none were measured).
+awards:
+  - "Best Overall, Carefeed Fall 2026 Hackathon: Admissions Desk, admissions tools that flag referrals missing payer or insurance details and let staff ask the sending hospital for them, plus universal search (Cmd-K), which reached production the following week."
+  - "Best Tooling Improvement, Carefeed Spring 2026 Hackathon: production-ready prototype that serves the main Laravel app on Octane and FrankenPHP alongside Apache, with request-state isolation, Docker images, CI builds and a gradual rollout switch."
+awardsEs:
+  - "Best Overall, Fall 2026 Hackathon de Carefeed: Admissions Desk, herramientas de admisión que detectan derivaciones sin datos del pagador o del seguro y permiten pedírselos al hospital de origen, más la búsqueda universal (Cmd-K), que llegó a producción la semana siguiente."
+  - "Best Tooling Improvement, Spring 2026 Hackathon de Carefeed: prototipo listo para producción que sirve la aplicación Laravel principal con Octane y FrankenPHP junto a Apache, con aislamiento del estado entre peticiones, imágenes Docker, builds en CI y un interruptor para activarlo de forma gradual."

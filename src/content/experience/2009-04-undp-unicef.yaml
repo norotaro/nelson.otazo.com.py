@@ -11,3 +11,5 @@ added:
   - Data-management web application.
 addedEs:
   - "Aplicación web de gestión de datos."
+cvExtra:
+  - Built with PHP and MySQL for large-scale data entry.

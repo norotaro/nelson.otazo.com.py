@@ -1,6 +1,6 @@
 // Checks the built site in dist/ for copy and privacy rules a review could miss.
 // Run after `astro build`; exits 1 with one line per violation.
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const dist = new URL('../dist/', import.meta.url).pathname;
@@ -136,6 +136,18 @@ for (const [page, now] of [['experience.html', 'now'], ['es/experiencia.html', '
   const current = (html.match(new RegExp(`→ ${now}\\]`, 'g')) ?? []).length;
   if (current !== 1) errors.push(`${page}: expected 1 "→ ${now}]" release, found ${current}`);
 }
+
+// The CV lists the same jobs as the home git log and links a PDF that ships with
+// the site. Whether the PDF is current is not checkable here: `npm run cv:pdf` owns it.
+const cvPage = read('cv.html');
+if (cvPage) {
+  const cvDates = startDates(cvPage, /<time class="cv__start" datetime="(\d{4}-\d{2})"/g);
+  if (homeDates.join() !== cvDates.join()) errors.push(`cv.html: job dates [${cvDates}] differ from the home git log [${homeDates}]`);
+  if (!cvPage.includes('href="/nelson-otazo-cv.pdf"')) errors.push('cv.html: no link to /nelson-otazo-cv.pdf');
+  // A phone number on a public page invites spam; the CV gives email and LinkedIn instead.
+  if (/\+595|\b09\d{2}[\s-]?\d{3}[\s-]?\d{3}\b/.test(visibleText(cvPage))) errors.push('cv.html: shows a phone number');
+}
+if (!existsSync(join(dist, 'nelson-otazo-cv.pdf'))) errors.push('nelson-otazo-cv.pdf: missing, run npm run cv:pdf');
 
 // The open-source pages list every open-source and archived project from the data.
 for (const page of ['open-source.html', 'es/codigo-abierto.html']) {

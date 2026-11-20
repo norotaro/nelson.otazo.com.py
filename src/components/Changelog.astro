@@ -14,21 +14,23 @@ const copy = {
   en: {
     title: 'Experience · Nelson Otazo',
     description:
-      'Career changelog of Nelson Otazo, from intern in 2008 to senior full-stack engineer working with Laravel and Vue.',
+      'Career changelog of Nelson Otazo, from intern in 2008 to senior software engineer working with Laravel and Vue.',
     intro: 'All notable changes to my career, newest first. Each release is one job, dated by its first and last month.',
     now: 'now',
     added: 'Added',
     changed: 'Changed',
+    awarded: 'Awarded',
   },
   es: {
     title: 'Experiencia · Nelson Otazo',
     description:
-      'Changelog de la carrera de Nelson Otazo, de pasante en 2008 a ingeniero full-stack senior con Laravel y Vue.',
+      'Changelog de la carrera de Nelson Otazo, de pasante en 2008 a ingeniero de software senior con Laravel y Vue.',
     intro:
       'Todos los cambios importantes de mi carrera, del más reciente al más antiguo. Cada versión es un trabajo, con su primer y último mes.',
     now: 'hoy',
     added: 'Añadido',
     changed: 'Cambiado',
+    awarded: 'Premiado',
   },
 }[lang];
 const es = lang === 'es';
@@ -80,6 +82,17 @@ const version = (yearMonth: string) => yearMonth.replace('-', '.');
                 </h3>
                 <ul>
                   {(es ? job.changedEs : job.changed).map((item) => <li>{item}</li>)}
+                </ul>
+              </>
+            )}
+
+            {job.awards.length > 0 && (
+              <>
+                <h3 class="release__group mono">
+                  <span class="release__marker" aria-hidden="true">### </span>{copy.awarded}
+                </h3>
+                <ul>
+                  {(es ? job.awardsEs : job.awards).map((item) => <li>{item}</li>)}
                 </ul>
               </>
             )}

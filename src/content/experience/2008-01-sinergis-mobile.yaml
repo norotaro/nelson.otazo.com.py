@@ -7,3 +7,5 @@ start: 2008-01
 end: 2009-03
 summary: Initial commit
 summaryEs: "Initial commit"
+cvExtra:
+  - Built a first web application with PHP and MySQL.

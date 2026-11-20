@@ -15,3 +15,6 @@ addedEs:
   - "Lideré un equipo de cinco personas que construyó una plataforma de eCommerce de gran escala."
   - "Especialista principal en integraciones de pago con Bancard vPOS 2.0."
   - "Impulsé la adopción de Agile en el equipo."
+cvExtra:
+  - Built private libraries reused across company projects.
+  - Introduced October CMS (Laravel based) as the main backend framework and Vue.js for the frontend.

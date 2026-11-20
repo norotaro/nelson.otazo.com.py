@@ -35,14 +35,26 @@ const experience = defineCollection({
       /** Spanish versions of `added` and `changed`, item by item. */
       addedEs: z.array(z.string()).default([]),
       changedEs: z.array(z.string()).default([]),
+      /**
+       * Extra detail shown on the CV only, after `added` and `changed`; the site
+       * keeps its short form. English only: the CV has no Spanish version yet.
+       */
+      cvExtra: z.array(z.string()).default([]),
+      /** Awards won in this job, shown on the CHANGELOG and the CV. */
+      awards: z.array(z.string()).default([]),
+      awardsEs: z.array(z.string()).default([]),
       stack: z.array(z.string()).default([]),
     })
     .refine((job) => !job.end || job.end >= job.start, {
       message: '`end` must not be before `start`',
     })
-    .refine((job) => job.addedEs.length === job.added.length && job.changedEs.length === job.changed.length, {
-      message: '`addedEs`/`changedEs` must translate `added`/`changed` item by item',
-    }),
+    .refine(
+      (job) =>
+        job.addedEs.length === job.added.length &&
+        job.changedEs.length === job.changed.length &&
+        job.awardsEs.length === job.awards.length,
+      { message: '`addedEs`/`changedEs`/`awardsEs` must translate `added`/`changed`/`awards` item by item' },
+    ),
 });
 
 const projects = defineCollection({
