@@ -10,7 +10,7 @@ export const ui = {
     'footer.source': 'source',
     'lang.switch': 'Leer en español',
     'home.whoami': 'husband, father & developer',
-    'home.headline': 'Senior Full-Stack Engineer · Laravel · Vue',
+    'home.headline': 'Senior Software Engineer · Laravel · Vue',
     'home.positioning': 'I build and own production software end to end, including the AI parts.',
     'home.context': '15+ years shipping web products. Based in Asunción, Paraguay, working remotely with US teams.',
     'work.label': '// selected work',
@@ -26,7 +26,7 @@ export const ui = {
     'footer.source': 'código',
     'lang.switch': 'Read in English',
     'home.whoami': 'esposo, padre y desarrollador',
-    'home.headline': 'Ingeniero full-stack senior · Laravel · Vue',
+    'home.headline': 'Ingeniero de software senior · Laravel · Vue',
     'home.positioning': 'Construyo y me hago cargo de software en producción de punta a punta, incluidas las partes de IA.',
     'home.context':
       'Más de 15 años creando productos web. Vivo en Asunción, Paraguay, y trabajo de forma remota con equipos de Estados Unidos.',
@@ -50,6 +50,7 @@ export const NAV: Record<Locale, NavItem[]> = {
   en: [
     { href: '/#work', label: '/work' },
     { href: '/experience', label: '/experience' },
+    { href: '/cv', label: '/cv' },
     { href: '/open-source', label: '/open-source' },
     { href: '/blog/page/1', label: '/blog' },
   ],
