@@ -15,3 +15,10 @@ added:
 addedEs:
   - "Diseñé la arquitectura de un generador de reportes refactorizado."
   - "Mentor e instructor de Laravel en el programa de trainees de la empresa."
+cvExtra:
+  - Reviewed Laravel code for security and performance.
+  - Maintained and optimized the core Asset Report Generator module.
+awards:
+  - "Cultural Champ, Applaudo Studios Recognition Awards (2022): for commitment to excellence and for collaboration, respect and transparency with the team."
+awardsEs:
+  - "Cultural Champ, Applaudo Studios Recognition Awards (2022): por el compromiso con la excelencia y por la colaboración, el respeto y la transparencia con el equipo."

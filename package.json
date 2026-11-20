@@ -12,6 +12,7 @@
     "check": "astro check",
     "check:contrast": "node scripts/check-contrast.mjs",
     "og": "sh scripts/render-og.sh",
+    "cv:pdf": "sh scripts/render-cv.sh",
     "verify": "node scripts/check-contrast.mjs && astro check && astro build && node scripts/check-dist.mjs"
   },
   "dependencies": {
