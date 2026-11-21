@@ -130,10 +130,6 @@ for (const [key, posts] of byKey) {
     }
   }
 }
-// Links to the old Spanish-only blog must keep reaching its posts.
-const redirects = read('_redirects');
-if (!/^\/blog\/post\/\*\s+\/es\/blog\/:splat\s+301$/m.test(redirects)) errors.push('_redirects: /blog/post/* → /es/blog/:splat 301 missing');
-if (!/^\/blog\/page\/\*\s+\/es\/blog\s+301$/m.test(redirects)) errors.push('_redirects: /blog/page/* → /es/blog 301 missing');
 
 // Experience CHANGELOG, in both languages: one release per job, one open-ended
 // current role, and the same start dates as the home git log.

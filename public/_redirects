@@ -2,6 +2,3 @@
 /sitemap.xml    /sitemap-index.xml    301
 # Browsers request /favicon.ico by default.
 /favicon.ico    /favicon-32.png       200
-# Spanish posts used to live at /blog/post/<slug> with paged lists at /blog/page/N.
-/blog/post/*    /es/blog/:splat       301
-/blog/page/*    /es/blog              301

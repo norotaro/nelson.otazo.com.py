@@ -17,7 +17,7 @@ npm run verify   # type check, build and output checks
 - `src/content/` content collections: experience, projects, blog posts in English and Spanish.
 - `src/styles/` design tokens and global CSS.
 - `src/i18n/` locale strings and the explicit map of translated page pairs.
-- `src/pages/` one file per route. The blog is at `/blog` (English) and `/es/blog` (Spanish); `public/_redirects` sends the old `/blog/post/<slug>` and `/blog/page/N` URLs to `/es/blog`.
+- `src/pages/` one file per route. The blog is at `/blog` (English) and `/es/blog` (Spanish).
 - `src/assets/blog/` post covers that Astro resizes. The same files stay in `public/img/blog/` because old links point there; update both when a cover changes.
 - `scripts/check-dist.mjs` checks the built site: old URLs, copy rules, page structure and image sizing. It runs as part of `npm run verify`.
 
