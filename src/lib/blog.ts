@@ -31,13 +31,9 @@ export async function postAlternates(post: Post): Promise<Alternate[]> {
 
 export const isoDate = (date: Date) => date.toISOString().slice(0, 10);
 
-/*
- * Optimizable copies of the covers. The originals stay in public/img/blog because
- * the old site linked them by URL; keep both in sync when a cover changes.
- */
 const covers = import.meta.glob<{ default: ImageMetadata }>('../assets/blog/*.{jpg,jpeg,png}', { eager: true });
 
-/** The cover for a post's `img` file name; matched case-insensitively like the old URLs. */
+/** The cover for a post's `img` file name, from src/assets/blog. */
 export function coverFor(post: Post): ImageMetadata | undefined {
   const name = post.data.img?.toLowerCase();
   if (!name) return undefined;

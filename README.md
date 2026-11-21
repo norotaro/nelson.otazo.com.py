@@ -18,7 +18,7 @@ npm run verify   # type check, build and output checks
 - `src/styles/` design tokens and global CSS.
 - `src/i18n/` locale strings and the explicit map of translated page pairs.
 - `src/pages/` one file per route. The blog is at `/blog` (English) and `/es/blog` (Spanish).
-- `src/assets/blog/` post covers that Astro resizes. The same files stay in `public/img/blog/` because old links point there; update both when a cover changes.
+- `src/assets/blog/` post covers that Astro resizes. `public/img/blog/` holds images used inside posts.
 - `scripts/check-dist.mjs` checks the built site: old URLs, copy rules, page structure and image sizing. It runs as part of `npm run verify`.
 
 ## CV
@@ -33,4 +33,4 @@ npm run cv:pdf
 
 ## Writing a post
 
-Add `src/content/blog/en/<slug>.md` or `src/content/blog/es/<slug>.md` with `title`, `description`, `date`, and optionally `img`, `category` and `tags`. The folder sets the language and the slug becomes the URL, so never rename a published one. To pair a post with its translation, give both the same `translationKey`; each can have its own slug. A cover named in `img` goes in both `src/assets/blog/` and `public/img/blog/`.
+Add `src/content/blog/en/<slug>.md` or `src/content/blog/es/<slug>.md` with `title`, `description`, `date`, and optionally `img`, `category` and `tags`. The folder sets the language and the slug becomes the URL, so never rename a published one. To pair a post with its translation, give both the same `translationKey`; each can have its own slug. A cover named in `img` goes in `src/assets/blog/`.
