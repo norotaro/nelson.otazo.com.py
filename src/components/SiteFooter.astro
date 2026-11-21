@@ -1,14 +1,15 @@
 ---
-import { alternatesFor } from '../i18n/alternates';
+import { alternatesFor, type Alternate } from '../i18n/alternates';
 import { pagePath } from '../lib/page-path';
 import { t, type Locale } from '../i18n/ui';
 
 interface Props {
   lang: Locale;
+  alternates?: Alternate[];
 }
 
 const { lang } = Astro.props;
-const other = alternatesFor(pagePath(Astro.url)).find((alt) => alt.locale !== lang);
+const other = (Astro.props.alternates ?? alternatesFor(pagePath(Astro.url))).find((alt) => alt.locale !== lang);
 const repo = 'https://github.com/norotaro/nelson.otazo.com.py';
 ---
 

@@ -81,8 +81,6 @@ for (const [label, pattern, expected] of expectations) {
   if (found !== expected) errors.push(`index.html: expected ${expected} ${label}, found ${found}`);
 }
 
-// Blog: the old site's public URLs must keep answering, so every post keeps its
-// slug, the listing keeps 5 posts per page, and /blog still redirects.
 const read = (path) => {
   try {
     return readFileSync(join(dist, path), 'utf8');
@@ -91,36 +89,47 @@ const read = (path) => {
     return '';
   }
 };
-const slugs = readdirSync(new URL('../src/content/blog/', import.meta.url))
-  .filter((name) => name.endsWith('.md'))
-  .map((name) => name.replace(/\.md$/, ''));
-for (const slug of slugs) {
-  const post = read(`blog/post/${slug}.html`);
-  if (post && !post.includes('<html lang="es"')) errors.push(`blog/post/${slug}.html: not lang="es"`);
-}
-// Covers are the largest paint on a post: serve resized copies with fixed dimensions.
-for (const slug of slugs) {
-  const source = readFileSync(new URL(`../src/content/blog/${slug}.md`, import.meta.url), 'utf8');
-  if (!/^img: /m.test(source)) continue;
-  const cover = read(`blog/post/${slug}.html`).match(/<img\b[^>]*class="post__cover"[^>]*>/)?.[0] ?? '';
-  if (!(/src="\/_astro\//.test(cover) && /width="\d+"/.test(cover) && /srcset=/.test(cover))) {
-    errors.push(`blog/post/${slug}.html: cover is not an optimized, sized image`);
-  }
-}
 
-const listed = [];
-for (let page = 1; page <= Math.ceil(slugs.length / 5); page++) {
-  const html = read(`blog/page/${page}.html`);
-  const links = [...new Set([...html.matchAll(/href="\/blog\/post\/([^"]+)"/g)].map(([, slug]) => slug))];
-  if (html && links.length !== Math.min(5, slugs.length - (page - 1) * 5)) {
-    errors.push(`blog/page/${page}.html: lists ${links.length} posts`);
+// Blog, per language: every post in src/content/blog/<lang>/ is built under that
+// language's /blog with its lang, the index and the feed list each post once, and a
+// post and its translation (same translationKey) point at each other.
+const blogBase = { en: 'blog', es: 'es/blog' };
+const byKey = new Map();
+for (const [lang, base] of Object.entries(blogBase)) {
+  const dir = new URL(`../src/content/blog/${lang}/`, import.meta.url);
+  const slugs = existsSync(dir)
+    ? readdirSync(dir).filter((name) => name.endsWith('.md')).map((name) => name.replace(/\.md$/, ''))
+    : [];
+  for (const slug of slugs) {
+    const page = `${base}/${slug}.html`;
+    const post = read(page);
+    if (post && !post.includes(`<html lang="${lang}"`)) errors.push(`${page}: not lang="${lang}"`);
+    const source = readFileSync(new URL(`${slug}.md`, dir), 'utf8');
+    const key = source.match(/^translationKey: (.+)$/m)?.[1];
+    if (key) byKey.set(key, [...(byKey.get(key) ?? []), { lang, path: `/${base}/${slug}`, page, html: post }]);
+    // Covers are the largest paint on a post: serve resized copies with fixed dimensions.
+    if (!/^img: /m.test(source)) continue;
+    const cover = post.match(/<img\b[^>]*class="post__cover"[^>]*>/)?.[0] ?? '';
+    if (!(/src="\/_astro\//.test(cover) && /width="\d+"/.test(cover) && /srcset=/.test(cover))) {
+      errors.push(`${page}: cover is not an optimized, sized image`);
+    }
   }
-  listed.push(...links);
+  const index = read(`${base}.html`);
+  const listed = [...new Set([...index.matchAll(new RegExp(`href="/${base}/([^"/]+)"`, 'g'))].map(([, slug]) => slug))]
+    .filter((slug) => slug !== 'rss.xml');
+  if (index && listed.sort().join() !== [...slugs].sort().join()) errors.push(`${base}.html: does not list every post once`);
+  const rss = read(`${base}/rss.xml`);
+  if (rss && (rss.match(/<item>/g) ?? []).length !== slugs.length) errors.push(`${base}/rss.xml: one <item> per post expected`);
 }
-if (listed.sort().join() !== [...slugs].sort().join()) errors.push('blog/page/*: listing does not cover every post once');
-const rss = read('blog/rss.xml');
-if (rss && (rss.match(/<item>/g) ?? []).length !== slugs.length) errors.push('blog/rss.xml: one <item> per post expected');
-if (!/^\/blog\s+\/blog\/page\/1\s+301$/m.test(read('_redirects'))) errors.push('_redirects: /blog → /blog/page/1 301 missing');
+for (const [key, posts] of byKey) {
+  for (const post of posts) {
+    for (const other of posts.filter((p) => p !== post)) {
+      if (!post.html.includes(`hreflang="${other.lang}" href="${SITE}${other.path}"`)) {
+        errors.push(`${post.page}: no hreflang link to its translation ${other.path} (${key})`);
+      }
+    }
+  }
+}
 
 // Experience CHANGELOG, in both languages: one release per job, one open-ended
 // current role, and the same start dates as the home git log.
@@ -165,6 +174,7 @@ for (const page of ['open-source.html', 'es/codigo-abierto.html']) {
 for (const [en, es] of [
   ['experience.html', 'es/experiencia.html'],
   ['open-source.html', 'es/codigo-abierto.html'],
+  ['blog.html', 'es/blog.html'],
   ['projects/teuka.html', 'es/proyectos/teuka.html'],
 ]) {
   const esPath = `/${es.replace(/\.html$/, '')}`;

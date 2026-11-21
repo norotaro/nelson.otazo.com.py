@@ -1,0 +1,16 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BlogPost from '../../components/blog/BlogPost.astro';
+import { getPosts, postSlug } from '../../lib/blog';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPosts('en');
+  // Newest first: "newer" is the previous entry, "older" the next one.
+  return posts.map((post, index) => ({
+    params: { slug: postSlug(post) },
+    props: { post, newer: posts[index - 1], older: posts[index + 1] },
+  }));
+}) satisfies GetStaticPaths;
+---
+
+<BlogPost {...Astro.props} />

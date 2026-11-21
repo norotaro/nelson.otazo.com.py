@@ -2,5 +2,3 @@
 /sitemap.xml    /sitemap-index.xml    301
 # Browsers request /favicon.ico by default.
 /favicon.ico    /favicon-32.png       200
-# The old site sent /blog to its first page; keep links to it working.
-/blog           /blog/page/1          301
