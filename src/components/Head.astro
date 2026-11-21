@@ -1,6 +1,6 @@
 ---
 import { Font } from 'astro:assets';
-import { alternatesFor } from '../i18n/alternates';
+import { alternatesFor, type Alternate } from '../i18n/alternates';
 import { pagePath } from '../lib/page-path';
 import type { Locale } from '../i18n/ui';
 
@@ -13,12 +13,13 @@ interface Props {
   /** Keep the page out of search results (404). */
   noindex?: boolean;
   ogType?: 'website' | 'article';
+  alternates?: Alternate[];
 }
 
 const { title, description, lang, ogImage = '/og.png', noindex = false, ogType = 'website' } = Astro.props;
 const site = Astro.site!;
 const canonical = new URL(pagePath(Astro.url), site).href;
-const alternates = alternatesFor(pagePath(Astro.url));
+const alternates = Astro.props.alternates ?? alternatesFor(pagePath(Astro.url));
 const ogLocale = lang === 'es' ? 'es_PY' : 'en_US';
 ---
 

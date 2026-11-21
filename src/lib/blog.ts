@@ -1,18 +1,33 @@
 import type { ImageMetadata } from 'astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import type { Alternate } from '../i18n/alternates';
+import type { Locale } from '../i18n/ui';
 
 export type Post = CollectionEntry<'blog'>;
 
-/** The old site listed 5 posts per page; `/blog/page/N` URLs depend on it. */
-export const POSTS_PER_PAGE = 5;
+/** The language folder (`en/` or `es/`) the post lives in. */
+export const postLocale = (post: Post) => post.id.split('/')[0] as Locale;
 
-/** All posts, newest first. */
-export async function getPosts(): Promise<Post[]> {
-  const posts = await getCollection('blog');
+export const postSlug = (post: Post) => post.id.slice(post.id.indexOf('/') + 1);
+
+export const blogPath = (lang: Locale) => (lang === 'es' ? '/es/blog' : '/blog');
+
+export const postUrl = (post: Post) => `${blogPath(postLocale(post))}/${postSlug(post)}`;
+
+/** Posts in `lang`, newest first. */
+export async function getPosts(lang: Locale): Promise<Post[]> {
+  const posts = await getCollection('blog', (post) => postLocale(post) === lang);
   return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
-export const postUrl = (post: Post) => `/blog/post/${post.id}`;
+/** The post and its translation as language alternates, or none for an untranslated post. */
+export async function postAlternates(post: Post): Promise<Alternate[]> {
+  const key = post.data.translationKey;
+  if (!key) return [];
+  const pair = await getCollection('blog', (other) => other.data.translationKey === key);
+  if (pair.length < 2) return [];
+  return pair.map((entry) => ({ locale: postLocale(entry), path: postUrl(entry) }));
+}
 
 export const isoDate = (date: Date) => date.toISOString().slice(0, 10);
 

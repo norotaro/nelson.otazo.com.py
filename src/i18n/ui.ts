@@ -52,12 +52,12 @@ export const NAV: Record<Locale, NavItem[]> = {
     { href: '/experience', label: '/experience' },
     { href: '/cv', label: '/cv' },
     { href: '/open-source', label: '/open-source' },
-    { href: '/blog/page/1', label: '/blog' },
+    { href: '/blog', label: '/blog' },
   ],
   es: [
     { href: '/es/teuka', label: '/teuka' },
     { href: '/es/experiencia', label: '/experiencia' },
     { href: '/es/codigo-abierto', label: '/codigo-abierto' },
-    { href: '/blog/page/1', label: '/blog' },
+    { href: '/es/blog', label: '/blog' },
   ],
 };

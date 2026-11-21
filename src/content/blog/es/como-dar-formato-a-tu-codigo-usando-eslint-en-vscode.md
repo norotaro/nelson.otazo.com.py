@@ -5,6 +5,7 @@ img: como-dar-formato-a-tu-codigo-usando-eslint-en-vscode.jpg
 date: 2021-07-21
 category: Tools
 tags: [vscode, eslint, formatear]
+translationKey: eslint-vscode
 ---
 Al iniciar el proyecto de este blog con NuxtJS seleccioné la opción de utilizar ESLint para el formato del código pero VSCode no funcionaba correctamente. Así que, buscando una solución, me encontré con este [artículo](https://daveceddia.com/vscode-use-eslintrc/) de [Dave Ceddia](https://daveceddia.com/) que me ayudó a solucionar el inconveniente agregando solamente un plugin y 4 líneas en la configuración. Aquí está cómo hacerlo:
 
@@ -31,28 +32,6 @@ Haz click en el pequeño ícono de arriba a la derecha que parece un papel con u
         "source.fixAll.eslint": true
     }
 }
-```
-
-```javascript
-// nuxt.config.ts
-
-import { defineNuxtConfig } from 'nuxt'
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
-export default defineNuxtConfig({
-  // ...
-  content: {
-    // https://content.nuxtjs.org/api/configuration
-    highlight: {
-      theme: {
-        // Default theme (same as single string)
-        default: 'material-palenight',
-        // Theme used if `html.dark`
-        dark: 'github-dark',
-      }
-    }
-  },
-  // ...
-})
 ```
 
 ¡Eso es todo! Guarda el archivo de configuración y ciérralo, hemos terminado.

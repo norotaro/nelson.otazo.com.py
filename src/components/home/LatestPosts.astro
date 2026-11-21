@@ -1,6 +1,6 @@
 ---
 import { t, type Locale } from '../../i18n/ui';
-import { getPosts, isoDate, postUrl } from '../../lib/blog';
+import { blogPath, getPosts, isoDate, postUrl } from '../../lib/blog';
 
 interface Props {
   lang: Locale;
@@ -8,31 +8,35 @@ interface Props {
 }
 
 const { lang, limit = 2 } = Astro.props;
-const posts = (await getPosts()).slice(0, limit);
+const posts = (await getPosts(lang)).slice(0, limit);
 ---
 
-<section class="posts" aria-labelledby="posts-title">
-  <div class="posts__head">
-    <h2 id="posts-title" class="section-label">
-      {lang === 'es' ? '// blog' : <>// blog · <span lang="es">escribo en español</span></>}
-    </h2>
-    <a class="mono posts__more" href="/blog/page/1" hreflang={lang === 'en' ? 'es' : undefined}>{t(lang, 'blog.more')}</a>
-  </div>
-  <ul class="card post-list" role="list">
-    {
-      posts.map((post) => (
-        <li>
-          <a class="post link-plain" href={postUrl(post)} hreflang="es">
-            <time class="post__date mono" datetime={isoDate(post.data.date)}>
-              {isoDate(post.data.date)}
-            </time>
-            <span class="post__title" lang="es">{post.data.title}</span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</section>
+{
+  posts.length > 0 && (
+  <section class="posts" aria-labelledby="posts-title">
+    <div class="posts__head">
+      <h2 id="posts-title" class="section-label">
+        {'// blog'}
+      </h2>
+      <a class="mono posts__more" href={blogPath(lang)}>{t(lang, 'blog.more')}</a>
+    </div>
+    <ul class="card post-list" role="list">
+      {
+        posts.map((post) => (
+          <li>
+            <a class="post link-plain" href={postUrl(post)}>
+              <time class="post__date mono" datetime={isoDate(post.data.date)}>
+                {isoDate(post.data.date)}
+              </time>
+              <span class="post__title">{post.data.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  )
+}
 
 <style>
   .posts {

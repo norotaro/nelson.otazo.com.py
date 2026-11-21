@@ -89,9 +89,12 @@ const clients = defineCollection({
   }),
 });
 
-/* Spanish posts migrated from the previous site; keep slugs, they are public URLs. */
+/*
+ * Posts live in `en/` or `es/`; the folder is the post's language and the file
+ * name its slug, which is a public URL: never rename a published one.
+ */
 const blog = defineCollection({
-  loader: glob({ base: './src/content/blog', pattern: '*.md' }),
+  loader: glob({ base: './src/content/blog', pattern: '{en,es}/*.md' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -99,6 +102,8 @@ const blog = defineCollection({
     img: z.string().optional(),
     category: z.string().optional(),
     tags: z.array(z.string()).default([]),
+    /** Shared by a post and its translation, which may have different slugs. */
+    translationKey: z.string().optional(),
   }),
 });
 
